@@ -23,7 +23,8 @@ const ROWS = [
 
 /** Drag the handle to compare a paper-and-sticky-notes day with the same day in Ophlow. */
 export function BeforeAfter() {
-  const [split, setSplit] = useState(50);
+  // Leave a clear margin before the product panel so its heading is readable on load.
+  const [split, setSplit] = useState(38);
 
   return (
     <div className="relative aspect-[4/5] w-full select-none overflow-hidden rounded-[2rem] border border-ink-200 shadow-[0_30px_80px_-40px_rgba(26,50,33,0.45)] sm:aspect-[16/9]">

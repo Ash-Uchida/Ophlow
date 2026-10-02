@@ -31,7 +31,7 @@ export function Header() {
         style={{ width: "100%", transform: `scaleX(${progress})` }}
       />
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <a href="#top" aria-label="Ophlow home">
+        <a href="/#top" aria-label="Ophlow home">
           <Logo />
         </a>
         <nav aria-label="Main" className="hidden items-center gap-8 md:flex">

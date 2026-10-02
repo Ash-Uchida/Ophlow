@@ -359,9 +359,12 @@ export default function Home() {
       <footer className="border-t border-ink-200/70">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-5 py-10 sm:flex-row sm:items-center">
           <Logo />
-          <p className="text-sm text-ink-500">
-            © {new Date().getFullYear()} {SITE.name}. {SITE.tagline}
-          </p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <p className="text-sm text-ink-500">
+              © {new Date().getFullYear()} {SITE.name}. {SITE.tagline}
+            </p>
+            <a href="/blog" className="text-sm font-medium text-forest-800 transition hover:text-rust-600">Blog</a>
+          </div>
         </div>
       </footer>
     </>

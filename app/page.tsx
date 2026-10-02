@@ -75,42 +75,36 @@ const STEPS: { icon: LucideIcon; title: string; body: string }[] = [
   },
 ];
 
-const MARKETS: { icon: LucideIcon; title: string; body: string; status: "Live pilot" | "Exploring" }[] = [
+const MARKETS: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: BedDouble,
     title: "Senior living",
-    body: "Assisted living operations: rooms, housekeeping, dining, maintenance and activities.",
-    status: "Live pilot",
+    body: "Coordinate housekeeping, dining, maintenance and activities across shifts.",
   },
   {
     icon: Hotel,
     title: "Hotels",
     body: "Coordinate room turnovers, housekeeping, maintenance and guest requests across shifts.",
-    status: "Exploring",
   },
   {
     icon: ClipboardList,
     title: "Restaurants",
     body: "Keep opening and closing checklists, prep, cleaning and maintenance tasks organized.",
-    status: "Exploring",
   },
   {
     icon: Building2,
     title: "Property management",
     body: "Move-ins, move-outs, unit turns and work orders across many buildings.",
-    status: "Exploring",
   },
   {
     icon: Stethoscope,
     title: "Clinics & outpatient care",
     body: "Room readiness, supplies and front-of-house flow, without touching patient records.",
-    status: "Exploring",
   },
   {
     icon: Factory,
     title: "Facilities & light industry",
     body: "Checklists, inspections and repair requests for crews who never sit at a desk.",
-    status: "Exploring",
   },
 ];
 
@@ -309,28 +303,71 @@ export default function Home() {
               </p>
             </Reveal>
             <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {MARKETS.map(({ icon: Icon, title, body, status }, i) => (
+              {MARKETS.map(({ icon: Icon, title, body }, i) => (
                 <Reveal key={title} delay={i * 90} className="h-full">
                   <SpotlightCard
-                    className={`h-full rounded-3xl p-6 ${
-                      status === "Live pilot" ? "bg-forest-800 ring-2 ring-rust-400" : "bg-forest-900/70 ring-1 ring-forest-700"
-                    }`}
+                    className="h-full rounded-3xl bg-forest-900/70 p-6 ring-1 ring-forest-700"
                   >
-                    <Icon className={`h-7 w-7 ${status === "Live pilot" ? "text-rust-200" : "text-forest-300"}`} />
+                    <Icon className="h-7 w-7 text-forest-300" />
                     <h3 className="mt-4 text-lg font-semibold">{title}</h3>
                     <p className="mt-2 flex-1 text-sm leading-relaxed text-forest-200">{body}</p>
-                    <span
-                      className={`mt-5 flex items-center gap-1.5 self-start rounded-full px-3 py-1 text-xs font-semibold ${
-                        status === "Live pilot" ? "bg-rust-500 text-white" : "bg-forest-800 text-forest-200"
-                      }`}
-                    >
-                      {status === "Live pilot" ? <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" /> : null}
-                      {status}
-                    </span>
                   </SpotlightCard>
                 </Reveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Hypothetical hotel example */}
+        <section className="border-y border-ink-200/70 bg-paper px-5 py-24">
+          <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+            <Reveal className="max-w-xl">
+              <Eyebrow>Hypothetical example</Eyebrow>
+              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Ophlow for Hotels</h2>
+              <p className="mt-5 text-lg leading-relaxed text-ink-700">
+                Imagine a shared view of the hotel’s daily work: rooms moving from checkout to clean to ready, guest
+                requests assigned to the right person, and maintenance issues tracked through completion. This is a
+                concept example of how Ophlow could fit a hotel team.
+              </p>
+            </Reveal>
+            <Reveal delay={120}>
+              <div className="rounded-3xl border border-ink-200 bg-cream p-5 shadow-xl shadow-forest-900/5 sm:p-7">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink-200 pb-4">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-ink-500">Today · Front desk + housekeeping</p>
+                    <h3 className="mt-1 font-serif text-2xl font-semibold text-forest-950">Room operations</h3>
+                  </div>
+                  <span className="rounded-full bg-forest-100 px-3 py-1.5 text-xs font-semibold text-forest-800">Hotel concept</span>
+                </div>
+                <div className="mt-5 grid grid-cols-3 gap-2 text-center sm:gap-3">
+                  {[
+                    ["6", "To clean"],
+                    ["4", "In progress"],
+                    ["12", "Ready"],
+                  ].map(([count, label]) => (
+                    <div key={label} className="rounded-2xl bg-white px-2 py-3 sm:px-4 sm:py-4">
+                      <p className="font-serif text-2xl font-semibold text-forest-900 sm:text-3xl">{count}</p>
+                      <p className="mt-1 text-xs text-ink-600 sm:text-sm">{label}</p>
+                    </div>
+                  ))}
+                </div>
+                <ul className="mt-4 grid gap-2.5">
+                  {[
+                    ["Room 214 · Checkout clean", "Housekeeping · Started 10 min ago", "In progress"],
+                    ["Room 306 · Guest request", "Extra towels · Assigned to Jordan", "Assigned"],
+                    ["Room 118 · AC not cooling", "Maintenance · Request logged 9:42 AM", "Open"],
+                  ].map(([title, detail, status]) => (
+                    <li key={title} className="flex items-center justify-between gap-3 rounded-2xl border border-ink-200 bg-white p-3 sm:p-4">
+                      <span className="min-w-0">
+                        <span className="block truncate text-sm font-semibold text-ink-900">{title}</span>
+                        <span className="mt-0.5 block truncate text-xs text-ink-500">{detail}</span>
+                      </span>
+                      <span className="shrink-0 rounded-full bg-forest-100 px-2.5 py-1 text-[11px] font-semibold text-forest-800">{status}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           </div>
         </section>
 

@@ -84,8 +84,14 @@ const MARKETS: { icon: LucideIcon; title: string; body: string; status: "Live pi
   },
   {
     icon: Hotel,
-    title: "Hospitality",
-    body: "Room turnovers, housekeeping and guest requests follow the same pattern.",
+    title: "Hotels",
+    body: "Coordinate room turnovers, housekeeping, maintenance and guest requests across shifts.",
+    status: "Exploring",
+  },
+  {
+    icon: ClipboardList,
+    title: "Restaurants",
+    body: "Keep opening and closing checklists, prep, cleaning and maintenance tasks organized.",
     status: "Exploring",
   },
   {
@@ -137,21 +143,21 @@ export default function Home() {
           />
           <div className="relative mx-auto grid max-w-6xl items-center gap-20 px-5 pb-28 pt-16 lg:grid-cols-[1.05fr_1fr] lg:pb-36 lg:pt-24">
             <div className="animate-rise">
-              <Eyebrow>Operations software, built on the floor</Eyebrow>
+              <Eyebrow>Day-to-day operations software</Eyebrow>
               <h1 className="text-4xl font-semibold leading-[1.1] text-forest-950 sm:text-5xl lg:text-6xl">
                 We turn <RotatingWord /> into software teams actually use.
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-700">
-                Ophlow builds simple tools for the people who keep buildings running: the housekeepers, cooks, techs and
-                managers who work on their feet, not at a desk. Our first product runs the day at an assisted living
-                community.
+                Ophlow helps companies organize the everyday work that keeps things running. Teams use one simple system
+                to manage checklists, handoffs, requests and tasks, whether they work in a hotel, restaurant, assisted
+                living community or somewhere else entirely.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <a
                   href="#product"
                   className="group inline-flex items-center gap-2 rounded-full bg-forest-800 px-6 py-3.5 text-sm font-semibold text-cream shadow-lg shadow-forest-900/20 transition hover:-translate-y-0.5 hover:bg-forest-900 hover:shadow-xl"
                 >
-                  See our first product <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  See it in action <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                 </a>
                 <a
                   href="#contact"
@@ -215,7 +221,7 @@ export default function Home() {
           <Reveal className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
               <Eyebrow>Product one</Eyebrow>
-              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Ophlow for Senior Living</h2>
+              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Our first product: Ophlow for Senior Living</h2>
               <p className="mt-5 text-lg leading-relaxed text-ink-700">
                 A manager website and a staff phone app sharing one live system. We built it side by side with an assisted
                 living operations team, around the work they do every single day.
@@ -295,14 +301,15 @@ export default function Home() {
             <Reveal className="max-w-3xl">
               <Eyebrow light>Where we&apos;re going</Eyebrow>
               <h2 className="text-3xl font-semibold leading-tight sm:text-5xl">
-                One product today. A company built to repeat it.
+                One approach for the day-to-day work in any company.
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-forest-100">
-                The problems we solved in senior living show up everywhere: work done on foot, tracked on paper, and handed
-                off between shifts. We&apos;re taking the same approach to the next industries on our list.
+                Hotels, restaurants, assisted living communities and many other companies share the same challenge: daily
+                work is spread across paper, messages and shift handoffs. Ophlow brings those tasks into one clear system,
+                shaped around how each team works.
               </p>
             </Reveal>
-            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {MARKETS.map(({ icon: Icon, title, body, status }, i) => (
                 <Reveal key={title} delay={i * 90} className="h-full">
                   <SpotlightCard
@@ -338,8 +345,9 @@ export default function Home() {
           </Reveal>
           <Reveal delay={120} className="space-y-5 text-lg leading-relaxed text-ink-700">
             <p>
-              Ophlow started inside an assisted living community. We worked with its operations team to take a day that ran
-              on paper, whiteboards and phone calls and put it on one live system that everyone could see.
+              Ophlow started inside an assisted living community, where we worked with its operations team to bring paper,
+              whiteboards and phone calls into one live system. That first product was built for senior living, while the
+              underlying approach applies to day-to-day operations in many kinds of companies.
             </p>
             <p>
               We&apos;re a small team that builds software alongside the people who use it, and we&apos;re growing. We&apos;re

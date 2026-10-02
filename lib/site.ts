@@ -2,7 +2,7 @@ export const SITE = {
   name: "Ophlow",
   tagline: "Operations software, built on the floor.",
   description:
-    "Ophlow builds simple operations software for teams who work on their feet, not at a desk. Our first product runs the day at an assisted living community.",
+    "Ophlow helps companies organize day-to-day operations with simple software for tasks, checklists, requests and shift handoffs. Our first product is built for senior living, with applications across hotels, restaurants and other industries.",
   email: "ophlow@gmail.com",
 };
 

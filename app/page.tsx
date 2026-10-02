@@ -206,9 +206,8 @@ export default function Home() {
             </div>
 
             <Reveal className="mt-20">
-              <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+              <div className="mb-6">
                 <h3 className="text-2xl font-semibold text-forest-950 sm:text-3xl">Same day, two ways.</h3>
-                <p className="font-hand text-2xl text-rust-500">drag the handle ↔</p>
               </div>
               <BeforeAfter />
             </Reveal>

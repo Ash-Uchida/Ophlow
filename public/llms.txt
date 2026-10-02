@@ -1,0 +1,33 @@
+# Ophlow
+
+> Ophlow builds simple operations software for teams who work on their feet, not at a desk. Our first product runs the day at an assisted living community: housekeeping, dining, maintenance, and activities sharing one live system across a manager website and a staff phone app.
+
+## What we do
+
+Ophlow replaces paper, whiteboards, and group texts with timestamped digital workflows for frontline teams. Every check-in, clean, order, and repair gets a timestamp instead of a scribble. Staff see only the screens for their job on the phone they already carry. Managers see where the time goes: checkout-to-room-ready, minutes per clean against target, meal order to tray delivered, repair request to fixed.
+
+## Product one: Ophlow for Senior Living
+
+A manager website and a staff phone app sharing one live system, built side by side with an assisted living operations team. Currently in live pilot.
+
+- Private by design: the system works with room numbers only. Resident names and health information never go into the system, and each person sees only the screens for their job.
+- Housekeeping: room cleans with checklists, timers, inspection pass/send-back flow, and a release button for stuck cleans.
+- Dining, maintenance, activities, and role-based access for managers, directors, and staff.
+
+## How we work
+
+1. We shadow the floor: spend time with the people doing the work and map every clipboard, whiteboard, and group text.
+2. We build the smallest useful thing: working software in weeks, faster than the paper it replaces.
+3. We ship with the team: weekly releases, and the people using the tool decide what gets built next.
+4. We measure the minutes: every step is timed, so improvements are proven with data.
+
+## Markets
+
+- Senior living (live pilot): assisted living operations — rooms, housekeeping, dining, maintenance, activities.
+- Exploring: hospitality, property management, clinics and outpatient care, facilities and light industry.
+
+## Contact
+
+- Website: https://ophlow.com/
+- Email: ophlow@gmail.com
+- The company is small, hands-on, and looking for design partners in every industry where the real work happens away from a desk.

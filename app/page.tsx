@@ -214,7 +214,7 @@ export default function Home() {
           <Reveal className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
               <Eyebrow>Quick interactive demo</Eyebrow>
-              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Explore Ophlow for Senior Living</h2>
+              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Discover More with Ophlow</h2>
               <p className="mt-5 text-lg leading-relaxed text-ink-700">
                 A manager website and a staff phone app sharing one live system. We built it side by side with an assisted
                 living operations team, around the work they do every single day.

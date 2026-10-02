@@ -10,7 +10,7 @@ const hand = Caveat({ variable: "--font-caveat", subsets: ["latin"] });
 export const metadata: Metadata = {
   title: `${SITE.name} — ${SITE.tagline}`,
   description: SITE.description,
-  icons: { icon: "/icon.svg" },
+  icons: { icon: "/logo.svg" },
   openGraph: {
     title: `${SITE.name} — ${SITE.tagline}`,
     description: SITE.description,

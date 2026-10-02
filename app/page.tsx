@@ -213,16 +213,15 @@ export default function Home() {
           <div className="mx-auto max-w-6xl">
           <Reveal className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
-              <Eyebrow>Product one</Eyebrow>
-              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Our first product: Ophlow for Senior Living</h2>
+              <Eyebrow>Quick interactive demo</Eyebrow>
+              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Explore Ophlow for Senior Living</h2>
               <p className="mt-5 text-lg leading-relaxed text-ink-700">
                 A manager website and a staff phone app sharing one live system. We built it side by side with an assisted
                 living operations team, around the work they do every single day.
               </p>
             </div>
-            <span className="flex items-center gap-2 rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-forest-500" />
-              In live pilot
+            <span className="rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">
+              Try the demo below
             </span>
           </Reveal>
 
@@ -315,59 +314,6 @@ export default function Home() {
                 </Reveal>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* Hypothetical hotel example */}
-        <section className="border-y border-ink-200/70 bg-paper px-5 py-24">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-            <Reveal className="max-w-xl">
-              <Eyebrow>Hypothetical example</Eyebrow>
-              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Ophlow for Hotels</h2>
-              <p className="mt-5 text-lg leading-relaxed text-ink-700">
-                Imagine a shared view of the hotel’s daily work: rooms moving from checkout to clean to ready, guest
-                requests assigned to the right person, and maintenance issues tracked through completion. This is a
-                concept example of how Ophlow could fit a hotel team.
-              </p>
-            </Reveal>
-            <Reveal delay={120}>
-              <div className="rounded-3xl border border-ink-200 bg-cream p-5 shadow-xl shadow-forest-900/5 sm:p-7">
-                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink-200 pb-4">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-ink-500">Today · Front desk + housekeeping</p>
-                    <h3 className="mt-1 font-serif text-2xl font-semibold text-forest-950">Room operations</h3>
-                  </div>
-                  <span className="rounded-full bg-forest-100 px-3 py-1.5 text-xs font-semibold text-forest-800">Hotel concept</span>
-                </div>
-                <div className="mt-5 grid grid-cols-3 gap-2 text-center sm:gap-3">
-                  {[
-                    ["6", "To clean"],
-                    ["4", "In progress"],
-                    ["12", "Ready"],
-                  ].map(([count, label]) => (
-                    <div key={label} className="rounded-2xl bg-white px-2 py-3 sm:px-4 sm:py-4">
-                      <p className="font-serif text-2xl font-semibold text-forest-900 sm:text-3xl">{count}</p>
-                      <p className="mt-1 text-xs text-ink-600 sm:text-sm">{label}</p>
-                    </div>
-                  ))}
-                </div>
-                <ul className="mt-4 grid gap-2.5">
-                  {[
-                    ["Room 214 · Checkout clean", "Housekeeping · Started 10 min ago", "In progress"],
-                    ["Room 306 · Guest request", "Extra towels · Assigned to Jordan", "Assigned"],
-                    ["Room 118 · AC not cooling", "Maintenance · Request logged 9:42 AM", "Open"],
-                  ].map(([title, detail, status]) => (
-                    <li key={title} className="flex items-center justify-between gap-3 rounded-2xl border border-ink-200 bg-white p-3 sm:p-4">
-                      <span className="min-w-0">
-                        <span className="block truncate text-sm font-semibold text-ink-900">{title}</span>
-                        <span className="mt-0.5 block truncate text-xs text-ink-500">{detail}</span>
-                      </span>
-                      <span className="shrink-0 rounded-full bg-forest-100 px-2.5 py-1 text-[11px] font-semibold text-forest-800">{status}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
           </div>
         </section>
 

@@ -121,6 +121,38 @@ h3 {
   letter-spacing: -0.015em;
 }
 
+.prose-body {
+  color: var(--color-ink-700);
+  font-size: 1.125rem;
+  line-height: 1.85;
+}
+
+.prose-body > * + * {
+  margin-top: 1.35em;
+}
+
+.prose-body h2,
+.prose-body h3 {
+  color: var(--color-forest-950);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 2em;
+}
+
+.prose-body h2 { font-size: 1.75rem; }
+.prose-body h3 { font-size: 1.35rem; }
+.prose-body ul,
+.prose-body ol { padding-left: 1.5rem; }
+.prose-body ul { list-style: disc; }
+.prose-body ol { list-style: decimal; }
+.prose-body li + li { margin-top: 0.45em; }
+.prose-body a { color: var(--color-forest-800); text-decoration: underline; text-underline-offset: 3px; }
+.prose-body blockquote {
+  border-left: 3px solid var(--color-rust-400);
+  color: var(--color-ink-600);
+  padding-left: 1rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

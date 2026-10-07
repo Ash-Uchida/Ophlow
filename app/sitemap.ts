@@ -7,10 +7,12 @@ export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
+  // The site is a static export, so the home page and blog index change when it's rebuilt.
+  const built = new Date();
 
   return [
-    { url: siteUrl, changeFrequency: "weekly", priority: 1 },
-    { url: `${siteUrl}/blog/`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${siteUrl}/`, lastModified: built, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteUrl}/blog/`, lastModified: built, changeFrequency: "weekly", priority: 0.8 },
     ...posts.map((post) => ({
       url: `${siteUrl}/blog/${post.slug}/`,
       lastModified: new Date(`${post.date}T00:00:00Z`),

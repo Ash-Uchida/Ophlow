@@ -13,24 +13,16 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
+import { BeforeAfter } from "@/components/before-after";
 import { Header } from "@/components/header";
 import { LiveMock } from "@/components/live-mock";
 import { Logo } from "@/components/logo";
+import { PainPoints } from "@/components/pain-points";
+import { PilotMeasures } from "@/components/pilot-measures";
+import { ProductTour } from "@/components/product-tour";
 import { Reveal } from "@/components/reveal";
+import { SpotlightCard } from "@/components/spotlight-card";
 import { SITE } from "@/lib/site";
-
-const MEASURES = [
-  "Checkout to room ready",
-  "Minutes per clean against target",
-  "Meal order to tray delivered",
-  "Repair request to fixed",
-];
-
-const PAINS = [
-  "Rooms sit empty because nobody knows they're clean.",
-  "Repairs get reported three times — or never.",
-  "Managers guess where the bottlenecks are.",
-];
 
 const FEATURES: { icon: LucideIcon; title: string; body: string }[] = [
   {
@@ -168,14 +160,7 @@ export default function Home() {
               <p className="mt-2 text-2xl font-semibold">Homestead Senior Living</p>
               <p className="mt-1 text-sm text-forest-200">What we measure every week:</p>
             </div>
-            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {MEASURES.map((m) => (
-                <li key={m} className="flex items-start gap-2.5 rounded-2xl bg-forest-900/70 p-4 text-[15px] ring-1 ring-forest-700">
-                  <Timer className="mt-0.5 h-4 w-4 shrink-0 text-rust-200" />
-                  {m}
-                </li>
-              ))}
-            </ul>
+            <PilotMeasures />
           </div>
         </section>
 
@@ -192,15 +177,15 @@ export default function Home() {
               because nobody saw the note. The next shift starts blind.
             </p>
           </Reveal>
-          <Reveal delay={120} className="flex flex-col justify-center gap-4">
-            {PAINS.map((p) => (
-              <p
-                key={p}
-                className="rounded-2xl border border-rust-200 bg-rust-50 px-6 py-5 text-lg font-medium text-forest-950"
-              >
-                {p}
-              </p>
-            ))}
+          <Reveal delay={120} className="flex flex-col justify-center">
+            <PainPoints />
+          </Reveal>
+          <Reveal className="lg:col-span-2">
+            <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+              <h3 className="text-2xl font-semibold text-forest-950 sm:text-3xl">Same day, two ways.</h3>
+              <span className="rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">Drag the handle</span>
+            </div>
+            <BeforeAfter />
           </Reveal>
         </section>
 
@@ -216,16 +201,28 @@ export default function Home() {
             <div className="mt-14 grid gap-6 md:grid-cols-3">
               {FEATURES.map(({ icon: Icon, title, body }, i) => (
                 <Reveal key={title} delay={i * 120}>
-                  <div className="group h-full rounded-3xl border border-ink-200 bg-cream p-7 transition duration-300 hover:-translate-y-1 hover:border-forest-300 hover:shadow-xl hover:shadow-forest-900/5">
+                  <SpotlightCard className="h-full rounded-3xl border border-ink-200 bg-cream p-7 hover:border-forest-300 hover:shadow-xl hover:shadow-forest-900/5">
                     <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-forest-800 text-cream transition duration-300 group-hover:-rotate-6 group-hover:scale-110">
                       <Icon className="h-6 w-6" />
                     </span>
                     <h3 className="text-xl font-semibold text-forest-950">{title}</h3>
                     <p className="mt-3 leading-relaxed text-ink-700">{body}</p>
-                  </div>
+                  </SpotlightCard>
                 </Reveal>
               ))}
             </div>
+            <Reveal className="mt-20">
+              <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+                <div className="max-w-2xl">
+                  <h3 className="text-2xl font-semibold text-forest-950 sm:text-3xl">Try it yourself.</h3>
+                  <p className="mt-3 text-lg leading-relaxed text-ink-700">
+                    A manager website and a staff phone app, sharing one live system. Pick a team and tap through their day.
+                  </p>
+                </div>
+                <span className="rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">Interactive demo</span>
+              </div>
+              <ProductTour />
+            </Reveal>
           </div>
         </section>
 

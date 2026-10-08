@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
-import { BeforeAfter } from "@/components/before-after";
 import { Header } from "@/components/header";
 import { LiveMock } from "@/components/live-mock";
 import { Logo } from "@/components/logo";
@@ -179,13 +178,6 @@ export default function Home() {
           </Reveal>
           <Reveal delay={120} className="flex flex-col justify-center">
             <PainPoints />
-          </Reveal>
-          <Reveal className="lg:col-span-2">
-            <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-              <h3 className="text-2xl font-semibold text-forest-950 sm:text-3xl">Same day, two ways.</h3>
-              <span className="rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">Drag the handle</span>
-            </div>
-            <BeforeAfter />
           </Reveal>
         </section>
 

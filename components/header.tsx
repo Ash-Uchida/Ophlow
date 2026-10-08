@@ -46,10 +46,10 @@ export function Header() {
             </a>
           ))}
           <a
-            href={`mailto:${SITE.email}`}
+            href={SITE.demoUrl}
             className="rounded-full bg-forest-800 px-4 py-2 text-sm font-semibold text-cream transition hover:-translate-y-0.5 hover:bg-forest-900 hover:shadow-lg hover:shadow-forest-900/20"
           >
-            Talk to us
+            Book a demo
           </a>
         </nav>
         <button
@@ -75,10 +75,10 @@ export function Header() {
             </a>
           ))}
           <a
-            href={`mailto:${SITE.email}`}
+            href={SITE.demoUrl}
             className="mt-4 block rounded-full bg-forest-800 px-4 py-3 text-center text-sm font-semibold text-cream"
           >
-            Talk to us
+            Book a demo
           </a>
         </nav>
       ) : null}

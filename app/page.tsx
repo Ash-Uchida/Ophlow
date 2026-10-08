@@ -3,6 +3,7 @@ import {
   BarChart3,
   BedDouble,
   Building2,
+  CalendarDays,
   ClipboardList,
   Factory,
   Footprints,
@@ -154,10 +155,10 @@ export default function Home() {
                   See it in action <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                 </a>
                 <a
-                  href="#contact"
+                  href={SITE.demoUrl}
                   className="inline-flex items-center gap-2 rounded-full border border-ink-300 bg-paper px-6 py-3.5 text-sm font-semibold text-forest-900 transition hover:-translate-y-0.5 hover:border-forest-400"
                 >
-                  Talk to us
+                  <CalendarDays className="h-4 w-4" /> Book a demo
                 </a>
               </div>
               <p className="mt-8 flex items-center gap-2 text-sm text-ink-600">
@@ -345,7 +346,7 @@ export default function Home() {
             <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 animate-float rounded-full bg-rust-400/60 blur-2xl" />
             <div aria-hidden className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 animate-float rounded-full bg-rust-700/50 blur-2xl [animation-delay:-3.5s]" />
             <div className="relative">
-              <h2 className="text-3xl font-semibold sm:text-5xl">Does your team still run on clipboards?</h2>
+              <h2 className="text-3xl font-semibold sm:text-5xl">Book a demo</h2>
               <p className="mx-auto mt-5 max-w-2xl text-lg text-rust-50">
                 Pilot partners, investors and future teammates: we&apos;d love to hear from you.
               </p>

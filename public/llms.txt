@@ -2,6 +2,10 @@
 
 > Ophlow builds simple operations software for teams who work on their feet, not at a desk. Our first product runs the day at an assisted living community: housekeeping, dining, maintenance, and activities sharing one live system across a manager website and a staff phone app.
 
+## Who it's for
+
+Assisted living and senior living communities: executive directors, operations and department managers, and the frontline staff in housekeeping, dining, and maintenance who run the building day to day.
+
 ## What we do
 
 Ophlow replaces paper, whiteboards, and group texts with timestamped digital workflows for frontline teams. Every check-in, clean, order, and repair gets a timestamp instead of a scribble. Staff see only the screens for their job on the phone they already carry. Managers see where the time goes: checkout-to-room-ready, minutes per clean against target, meal order to tray delivered, repair request to fixed.
@@ -12,7 +16,9 @@ A manager website and a staff phone app sharing one live system, built side by s
 
 - Private by design: the system works with room numbers only. Resident names and health information never go into the system, and each person sees only the screens for their job.
 - Housekeeping: room cleans with checklists, timers, inspection pass/send-back flow, and a release button for stuck cleans.
-- Dining, maintenance, activities, and role-based access for managers, directors, and staff.
+- Maintenance: repair requests with a timestamp from request to fixed.
+- Dining: meal orders through to tray delivered.
+- Scheduling, activities, and role-based access for managers, directors, and staff.
 
 ## How we work
 
@@ -25,6 +31,14 @@ A manager website and a staff phone app sharing one live system, built side by s
 
 - Senior living (live pilot): assisted living operations — rooms, housekeeping, dining, maintenance, activities.
 - Exploring: hospitality, property management, clinics and outpatient care, facilities and light industry.
+
+## Key pages
+
+- Home: https://ophlow.com/ — what Ophlow is, the senior living product, how we work, and how to get in touch.
+- Blog: https://ophlow.com/blog/ — notes from the floor on frontline operations.
+- Why we started Ophlow on the floor of an assisted living community: https://ophlow.com/blog/why-we-started-on-the-floor/
+- The clipboard is the bottleneck: what paper checklists cost a housekeeping team: https://ophlow.com/blog/clipboard-bottleneck/
+- Sitemap: https://ophlow.com/sitemap.xml
 
 ## Contact
 

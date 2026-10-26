@@ -114,8 +114,8 @@ export default function Home() {
             aria-hidden
             className="pointer-events-none absolute inset-0 [background-image:radial-gradient(rgba(31,60,39,0.09)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]"
           />
-          <div className="relative mx-auto max-w-6xl px-5 pb-24 pt-16 lg:pt-24">
-            <div className="mx-auto max-w-3xl animate-rise text-center">
+          <div className="relative mx-auto grid max-w-6xl items-center gap-16 px-5 pb-24 pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-20 lg:pb-32 lg:pt-24">
+            <div className="mx-auto max-w-3xl animate-rise text-center lg:mx-0 lg:text-left">
               <p className="inline-flex items-center gap-2 rounded-full border border-forest-200 bg-paper px-4 py-1.5 text-sm font-medium text-forest-800">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-forest-400 opacity-60 motion-reduce:hidden" />
@@ -126,18 +126,18 @@ export default function Home() {
               <h1 className="mt-6 text-4xl font-semibold leading-[1.1] text-forest-950 sm:text-5xl lg:text-6xl">
                 The clipboard is the bottleneck.
               </h1>
-              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-700">
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-700 lg:mx-0">
                 Ophlow gives your housekeeping, dining, and maintenance teams one simple system — big buttons, timestamps,
                 no training manual. Managers finally see where the day goes.
               </p>
               <div className="mt-9">
-                <Ctas center />
+                <Ctas center className="lg:justify-start" />
               </div>
               <a href="#build" className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800 hover:text-rust-600">
                 Or build your own Ophlow <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </a>
             </div>
-            <div className="mx-auto mt-16 max-w-xl animate-rise [animation-delay:150ms]">
+            <div className="mx-auto w-full max-w-xl animate-rise [animation-delay:150ms]">
               <LiveMock />
             </div>
           </div>

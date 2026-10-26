@@ -2,9 +2,9 @@ import { ArrowRight, CalendarDays } from "lucide-react";
 import Link from "next/link";
 
 /** The two buttons every section ends on: Book a demo (/book) and Get started (/workspace). */
-export function Ctas({ center = false, light = false }: { center?: boolean; light?: boolean }) {
+export function Ctas({ center = false, light = false, className = "" }: { center?: boolean; light?: boolean; className?: string }) {
   return (
-    <div className={`flex flex-wrap items-center gap-3 ${center ? "justify-center" : ""}`}>
+    <div className={`flex flex-wrap items-center gap-3 ${center ? "justify-center" : ""} ${className}`}>
       <Link
         href="/book"
         className={`group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition hover:-translate-y-0.5 ${

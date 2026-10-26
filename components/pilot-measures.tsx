@@ -10,7 +10,7 @@ const MEASURES = [
   { title: "Repair request to fixed", start: "Request goes in with a photo", stop: "After photo marks it fixed" },
 ];
 
-/** Pilot measures; tap one to see when its clock starts and stops. */
+/** What Ophlow measures; tap one to see when its clock starts and stops. */
 export function PilotMeasures() {
   const [open, setOpen] = useState<number | null>(null);
 

@@ -117,7 +117,7 @@ export function BookingWidget() {
           <h2 className="mt-3 text-2xl font-semibold">{SITE.name} demo</h2>
           <p className="mt-2 text-sm text-forest-200">{AVAILABILITY.slotMinutes} minutes · video call</p>
           <ul className="mt-6 space-y-2.5 text-sm text-forest-100">
-            <li>• The live pilot, running on a real building</li>
+            <li>• The manager website and staff phone app, live</li>
             <li>• Rooms, cleans, meals &amp; repairs, live</li>
             <li>• What we&apos;d set up for your floor</li>
             <li>• Becoming a design partner</li>

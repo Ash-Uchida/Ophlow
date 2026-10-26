@@ -12,7 +12,7 @@ Ophlow replaces paper, whiteboards, and group texts with timestamped digital wor
 
 ## Product one: Ophlow for Senior Living
 
-A manager website and a staff phone app sharing one live system, built side by side with an assisted living operations team. Currently in live pilot.
+A manager website and a staff phone app sharing one live system, built side by side with an assisted living operations team.
 
 - Private by design: the system works with room numbers only. Resident names and health information never go into the system, and each person sees only the screens for their job.
 - Housekeeping: room cleans with checklists, timers, inspection pass/send-back flow, and a release button for stuck cleans.
@@ -29,7 +29,7 @@ A manager website and a staff phone app sharing one live system, built side by s
 
 ## Markets
 
-- Senior living (live pilot): assisted living operations — rooms, housekeeping, dining, maintenance, activities.
+- Senior living: assisted living operations — rooms, housekeeping, dining, maintenance, activities.
 - Exploring: hospitality, property management, clinics and outpatient care, facilities and light industry.
 
 ## Key pages

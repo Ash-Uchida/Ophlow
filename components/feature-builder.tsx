@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { FEATURES, FEATURE_BY_ID, FEATURE_GROUPS, TONES, featuresHref, type Feature } from "@/lib/features";
 
 const KEY = "ophlow-feature-builder-v1";
-/** What the pilot building runs today: a one-click starting point. */
-const PILOT = ["rooms", "housekeeping", "orders", "maintenance", "today"];
+/** The core screens most buildings start with: a one-click starting point. */
+const ESSENTIALS = ["rooms", "housekeeping", "orders", "maintenance", "today"];
 
 type State = { order: string[]; off: Record<string, number[]>; collapsed: Record<string, boolean> };
 const EMPTY: State = { order: [], off: {}, collapsed: {} };
@@ -230,10 +230,10 @@ export function FeatureBuilder() {
               <p className="mt-2 max-w-sm text-ink-600">Pick what your building needs. Each one shows what your team can do with it.</p>
               <button
                 type="button"
-                onClick={() => setState({ ...state, order: PILOT })}
+                onClick={() => setState({ ...state, order: ESSENTIALS })}
                 className="mt-6 inline-flex items-center gap-2 rounded-full border border-ink-300 bg-white px-5 py-2.5 text-sm font-semibold text-forest-900 transition hover:-translate-y-0.5 hover:border-forest-400"
               >
-                <Sparkles className="h-4 w-4 text-rust-500" /> Start with what our pilot runs
+                <Sparkles className="h-4 w-4 text-rust-500" /> Start with the essentials
               </button>
             </div>
           ) : null}

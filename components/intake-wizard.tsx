@@ -154,7 +154,7 @@ export function IntakeWizard({ intake, setIntake, step, setStep }: Props) {
                 </select>
               </Field>
               <Field label="Building names" hint="One per line, the way staff say them.">
-                <textarea rows={2} className={input} value={intake.buildings} onChange={(e) => set("buildings", e.target.value)} placeholder={"e.g. Building 3\nSt. Anthony"} />
+                <textarea rows={2} className={input} value={intake.buildings} onChange={(e) => set("buildings", e.target.value)} placeholder={"e.g. North wing\nThe Cottages"} />
               </Field>
               <Choices label="Types of care" wide>
                 {CARE_TYPES.map((x) => (

@@ -121,7 +121,7 @@ export default function Home() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-forest-400 opacity-60 motion-reduce:hidden" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-forest-500" />
                 </span>
-                Live pilot at an assisted living community
+                Built with an assisted living operations team
               </p>
               <h1 className="mt-6 text-4xl font-semibold leading-[1.1] text-forest-950 sm:text-5xl lg:text-6xl">
                 The clipboard is the bottleneck.
@@ -143,13 +143,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Proof strip */}
-        <section aria-label="Live pilot" className="border-y border-ink-200/70 bg-forest-950 text-cream">
+        {/* What we measure */}
+        <section aria-label="What Ophlow measures" className="border-y border-ink-200/70 bg-forest-950 text-cream">
           <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-14">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-rust-200">Live pilot</p>
-              <p className="mt-2 text-2xl font-semibold">Homestead Senior Living</p>
-              <p className="mt-1 text-sm text-forest-200">What we measure every week:</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-rust-200">Every step, timed</p>
+              <p className="mt-2 text-2xl font-semibold">What Ophlow measures</p>
+              <p className="mt-1 text-sm text-forest-200">Tap one to see when its clock starts and stops.</p>
             </div>
             <PilotMeasures />
           </div>
@@ -312,13 +312,13 @@ export default function Home() {
               <div className="relative">
                 <h2 className="text-3xl font-semibold sm:text-5xl">See your building&apos;s day, clearly.</h2>
                 <p className="mx-auto mt-5 max-w-2xl text-lg text-rust-50">
-                  Book a 20-minute demo, or get started and tell us about your building — we&apos;ll show you the pilot running live.
+                  Book a 20-minute demo, or get started and tell us about your building — we&apos;ll walk you through it on your own building&apos;s day.
                 </p>
                 <div className="mt-9">
                   <Ctas center light />
                 </div>
                 <p className="mx-auto mt-8 max-w-xl text-sm text-rust-50">
-                  Pilot partners, investors, and future teammates: we&apos;d love to hear from you —{" "}
+                  Design partners, investors, and future teammates: we&apos;d love to hear from you —{" "}
                   <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-1 font-semibold text-white underline underline-offset-4">
                     <Mail className="h-3.5 w-3.5" />
                     {SITE.email}

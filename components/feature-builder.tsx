@@ -106,10 +106,8 @@ export function FeatureBuilder() {
       {/* Palette */}
       <aside className="border-b border-ink-200 bg-cream/60 p-5 lg:border-b-0 lg:border-r">
         <p className="text-sm text-ink-600">
-          <span className="hidden sm:inline">Drag a feature onto your screen, or </span>
-          <span className="sm:hidden">Tap a feature to add it, or </span>
-          <span className="hidden sm:inline">click it to add.</span>
-          <span className="sm:hidden">drag it.</span>
+          <span className="hidden sm:inline">Drag a feature onto your screen, or click it to add. Click again to remove it.</span>
+          <span className="sm:hidden">Tap a feature to add it, tap again to remove it, or drag it.</span>
         </p>
         <label className="mt-3 flex items-center gap-2 rounded-xl border border-ink-200 bg-white px-3 focus-within:border-forest-400 focus-within:ring-2 focus-within:ring-forest-100">
           <Search className="h-4 w-4 text-ink-400" />
@@ -143,10 +141,11 @@ export function FeatureBuilder() {
                           e.dataTransfer.effectAllowed = "copyMove";
                         }}
                         onDragEnd={endDrag}
-                        onClick={() => add(f.id)}
-                        title={f.tagline}
+                        onClick={() => (on ? remove(f.id) : add(f.id))}
+                        aria-pressed={on}
+                        title={on ? `Click to remove ${f.name}` : f.tagline}
                         className={`group flex w-full cursor-grab items-center gap-3 rounded-xl border p-2.5 text-left transition active:cursor-grabbing ${
-                          on ? "border-forest-300 bg-forest-50" : "border-ink-200 bg-white hover:-translate-y-0.5 hover:border-forest-300 hover:shadow-md"
+                          on ? "border-forest-300 bg-forest-50 hover:border-rust-300" : "border-ink-200 bg-white hover:-translate-y-0.5 hover:border-forest-300 hover:shadow-md"
                         }`}
                       >
                         <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${TONES[f.tone]}`}>
@@ -154,9 +153,23 @@ export function FeatureBuilder() {
                         </span>
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-sm font-semibold text-forest-950">{f.name}</span>
-                          <span className="block truncate text-xs text-ink-500">{on ? "On your screen" : f.tagline}</span>
+                          {on ? (
+                            <span className="block truncate text-xs text-ink-500">
+                              <span className="group-hover:hidden">On your screen</span>
+                              <span className="hidden text-rust-600 group-hover:inline">Click to remove</span>
+                            </span>
+                          ) : (
+                            <span className="block truncate text-xs text-ink-500">{f.tagline}</span>
+                          )}
                         </span>
-                        {on ? <Check className="h-4 w-4 shrink-0 text-forest-600" /> : <Plus className="h-4 w-4 shrink-0 text-ink-400 transition group-hover:text-rust-500" />}
+                        {on ? (
+                          <>
+                            <Check className="h-4 w-4 shrink-0 text-forest-600 group-hover:hidden" />
+                            <X className="hidden h-4 w-4 shrink-0 text-rust-500 group-hover:block" />
+                          </>
+                        ) : (
+                          <Plus className="h-4 w-4 shrink-0 text-ink-400 transition group-hover:text-rust-500" />
+                        )}
                       </button>
                     );
                   })}

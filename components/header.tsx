@@ -1,9 +1,10 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/logo";
-import { NAV, SITE } from "@/lib/site";
+import { NAV } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -31,10 +32,10 @@ export function Header() {
         style={{ width: "100%", transform: `scaleX(${progress})` }}
       />
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <a href="/#top" aria-label="Ophlow home">
+        <Link href="/#top" aria-label="Ophlow home">
           <Logo />
-        </a>
-        <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
+        </Link>
+        <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
           {NAV.map((link) => (
             <a
               key={link.href}
@@ -45,25 +46,33 @@ export function Header() {
               <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-rust-400 transition-transform duration-300 group-hover:scale-x-100" />
             </a>
           ))}
-          <a
-            href={SITE.demoUrl}
-            className="rounded-full bg-forest-800 px-4 py-2 text-sm font-semibold text-cream transition hover:-translate-y-0.5 hover:bg-forest-900 hover:shadow-lg hover:shadow-forest-900/20"
+        </nav>
+        <div className="hidden items-center gap-2 lg:flex">
+          <Link
+            href="/book"
+            className="rounded-full border border-ink-300 bg-paper px-4 py-2 text-sm font-semibold text-forest-900 transition hover:-translate-y-0.5 hover:border-forest-400"
           >
             Book a demo
-          </a>
-        </nav>
+          </Link>
+          <Link
+            href="/workspace"
+            className="rounded-full bg-forest-800 px-4 py-2 text-sm font-semibold text-cream transition hover:-translate-y-0.5 hover:bg-forest-900 hover:shadow-lg hover:shadow-forest-900/20"
+          >
+            Get started
+          </Link>
+        </div>
         <button
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-full text-forest-900 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-forest-900 lg:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
       {open ? (
-        <nav aria-label="Mobile" className="border-t border-ink-200 bg-cream px-5 pb-5 pt-2 md:hidden">
+        <nav aria-label="Mobile" className="border-t border-ink-200 bg-cream px-5 pb-5 pt-2 lg:hidden">
           {NAV.map((link) => (
             <a
               key={link.href}
@@ -74,12 +83,14 @@ export function Header() {
               {link.label}
             </a>
           ))}
-          <a
-            href={SITE.demoUrl}
-            className="mt-4 block rounded-full bg-forest-800 px-4 py-3 text-center text-sm font-semibold text-cream"
-          >
-            Book a demo
-          </a>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            <Link href="/book" className="rounded-full border border-ink-300 bg-paper px-4 py-3 text-center text-sm font-semibold text-forest-900">
+              Book a demo
+            </Link>
+            <Link href="/workspace" className="rounded-full bg-forest-800 px-4 py-3 text-center text-sm font-semibold text-cream">
+              Get started
+            </Link>
+          </div>
         </nav>
       ) : null}
     </header>

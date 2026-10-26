@@ -1,63 +1,51 @@
 import {
   ArrowRight,
   BarChart3,
-  BedDouble,
-  Building2,
-  CalendarDays,
   ClipboardList,
-  Factory,
   Footprints,
-  Hotel,
+  Mail,
+  Plus,
   Ruler,
-  ShieldCheck,
   Smartphone,
-  Stethoscope,
   Timer,
   Users,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { BeforeAfter } from "@/components/before-after";
-import { CopyEmail } from "@/components/copy-email";
+import { Ctas } from "@/components/ctas";
+import { FeatureBuilder } from "@/components/feature-builder";
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { LiveMock } from "@/components/live-mock";
-import { Logo } from "@/components/logo";
-import { Marquee } from "@/components/marquee";
+import { PainPoints } from "@/components/pain-points";
+import { PilotMeasures } from "@/components/pilot-measures";
 import { ProductTour } from "@/components/product-tour";
 import { Reveal } from "@/components/reveal";
-import { RotatingWord } from "@/components/rotating-word";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { SITE } from "@/lib/site";
 
-const PILLARS: { icon: LucideIcon; title: string; body: string }[] = [
+const FEATURES: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: ClipboardList,
     title: "Replace the paper",
-    body: "Every check-in, clean, order and repair gets a timestamp instead of a scribble. Nothing gets lost between shifts.",
+    body: "Every check-in, clean, order, and repair gets a timestamp instead of a scribble. Nothing gets lost between shifts.",
   },
   {
     icon: Smartphone,
     title: "Built for people on their feet",
-    body: "Big, simple screens on the phone staff already carry. Each person sees only the screens for their job.",
+    body: "Big, simple screens on the phone staff already carry. Each person sees only their job — no training manual, no 40-tab dashboard.",
   },
   {
     icon: BarChart3,
     title: "Show where the time goes",
-    body: "Every step is measured, so managers can see the one bottleneck worth fixing this week instead of guessing.",
+    body: "Every step is measured. See the one bottleneck worth fixing this week instead of guessing.",
   },
-];
-
-const MEASURES = [
-  "Checkout to room ready",
-  "Minutes per clean against the target",
-  "Meal order to tray delivered",
-  "Repair request to fixed",
 ];
 
 const STEPS: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Footprints,
     title: "We shadow the floor",
-    body: "We spend time with the people doing the work and map every clipboard, whiteboard and group text.",
+    body: "We spend time with the people doing the work and map every clipboard, whiteboard, and group text.",
   },
   {
     icon: Ruler,
@@ -72,40 +60,30 @@ const STEPS: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Timer,
     title: "We measure the minutes",
-    body: "Every step is timed, so improvements are proven with data rather than assumed.",
+    body: "Every step is timed, so improvements are proven with data, not assumed.",
   },
 ];
 
-const MARKETS: { icon: LucideIcon; title: string; body: string }[] = [
+const FAQS = [
   {
-    icon: BedDouble,
-    title: "Senior living",
-    body: "Coordinate housekeeping, dining, maintenance and activities across shifts.",
+    q: "We already have an EHR. Do we need to replace it?",
+    a: "No. Your EHR handles clinical records and compliance. Ophlow handles the building's day — cleans, repairs, meal orders — the work your EHR was never designed for. The two don't compete.",
   },
   {
-    icon: Hotel,
-    title: "Hotels",
-    body: "Coordinate room turnovers, housekeeping, maintenance and guest requests across shifts.",
+    q: "Will our staff actually use it?",
+    a: "That's the whole bet. Big buttons, three taps to finish a clean, nothing they don't need. We design it with the people who'll tap it, on the floor, before we ship it.",
   },
   {
-    icon: ClipboardList,
-    title: "Restaurants",
-    body: "Keep opening and closing checklists, prep, cleaning and maintenance tasks organized.",
+    q: "What about resident privacy?",
+    a: "Ophlow works with room numbers only. Resident names and health information never go into the system — and each person sees only the screens for their job.",
   },
   {
-    icon: Building2,
-    title: "Property management",
-    body: "Move-ins, move-outs, unit turns and work orders across many buildings.",
+    q: "How long does setup take?",
+    a: "Days, not months. We map your building's actual workflows on the floor, configure the software around them, and your team is using it within weeks.",
   },
   {
-    icon: Stethoscope,
-    title: "Clinics & outpatient care",
-    body: "Room readiness, supplies and front-of-house flow, without touching patient records.",
-  },
-  {
-    icon: Factory,
-    title: "Facilities & light industry",
-    body: "Checklists, inspections and repair requests for crews who never sit at a desk.",
+    q: "What does it cost?",
+    a: "We're working with a small number of design partners right now, and pricing is part of that conversation — not a price list. Book a demo and we'll talk about what makes sense for your building.",
   },
 ];
 
@@ -136,128 +114,124 @@ export default function Home() {
             aria-hidden
             className="pointer-events-none absolute inset-0 [background-image:radial-gradient(rgba(31,60,39,0.09)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]"
           />
-          <div className="relative mx-auto grid max-w-6xl items-center gap-20 px-5 pb-28 pt-16 lg:grid-cols-[1.05fr_1fr] lg:pb-36 lg:pt-24">
-            <div className="animate-rise">
-              <Eyebrow>Day-to-day operations software</Eyebrow>
-              <h1 className="text-4xl font-semibold leading-[1.1] text-forest-950 sm:text-5xl lg:text-6xl">
-                We turn <RotatingWord /> into software teams actually use.
-              </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-700">
-                Ophlow helps companies organize the everyday work that keeps things running. Teams use one simple system
-                to manage checklists, handoffs, requests and tasks, whether they work in a hotel, restaurant, assisted
-                living community or somewhere else entirely.
-              </p>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <a
-                  href="#product"
-                  className="group inline-flex items-center gap-2 rounded-full bg-forest-800 px-6 py-3.5 text-sm font-semibold text-cream shadow-lg shadow-forest-900/20 transition hover:-translate-y-0.5 hover:bg-forest-900 hover:shadow-xl"
-                >
-                  See it in action <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-                </a>
-                <a
-                  href={SITE.demoUrl}
-                  className="inline-flex items-center gap-2 rounded-full border border-ink-300 bg-paper px-6 py-3.5 text-sm font-semibold text-forest-900 transition hover:-translate-y-0.5 hover:border-forest-400"
-                >
-                  <CalendarDays className="h-4 w-4" /> Book a demo
-                </a>
-              </div>
-              <p className="mt-8 flex items-center gap-2 text-sm text-ink-600">
+          <div className="relative mx-auto max-w-6xl px-5 pb-24 pt-16 lg:pt-24">
+            <div className="mx-auto max-w-3xl animate-rise text-center">
+              <p className="inline-flex items-center gap-2 rounded-full border border-forest-200 bg-paper px-4 py-1.5 text-sm font-medium text-forest-800">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-forest-400 opacity-60 motion-reduce:hidden" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-forest-500" />
                 </span>
-                Now in a live pilot with an assisted living community.
+                Live pilot at an assisted living community
               </p>
+              <h1 className="mt-6 text-4xl font-semibold leading-[1.1] text-forest-950 sm:text-5xl lg:text-6xl">
+                The clipboard is the bottleneck.
+              </h1>
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-700">
+                Ophlow gives your housekeeping, dining, and maintenance teams one simple system — big buttons, timestamps,
+                no training manual. Managers finally see where the day goes.
+              </p>
+              <div className="mt-9">
+                <Ctas center />
+              </div>
+              <a href="#build" className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800 hover:text-rust-600">
+                Or build your own Ophlow <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </a>
             </div>
-            <div className="animate-rise [animation-delay:150ms]">
+            <div className="mx-auto mt-16 max-w-xl animate-rise [animation-delay:150ms]">
               <LiveMock />
             </div>
           </div>
         </section>
 
-        <Marquee />
+        {/* Proof strip */}
+        <section aria-label="Live pilot" className="border-y border-ink-200/70 bg-forest-950 text-cream">
+          <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-14">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-rust-200">Live pilot</p>
+              <p className="mt-2 text-2xl font-semibold">Homestead Senior Living</p>
+              <p className="mt-1 text-sm text-forest-200">What we measure every week:</p>
+            </div>
+            <PilotMeasures />
+          </div>
+        </section>
 
-        {/* What we do */}
-        <section id="what" className="bg-paper">
+        {/* Problem */}
+        <section id="problem" className="mx-auto grid max-w-6xl gap-12 px-5 py-24 lg:grid-cols-2">
+          <Reveal>
+            <Eyebrow>The problem</Eyebrow>
+            <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">
+              Paper doesn&apos;t scale. Neither do group texts.
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-ink-700">
+              Every shift, your teams write things down — room numbers on clipboards, repairs on sticky notes, meal changes
+              in a group chat. Then the information dies there. Nobody knows which rooms are actually ready. Repairs wait
+              because nobody saw the note. The next shift starts blind.
+            </p>
+          </Reveal>
+          <Reveal delay={120} className="flex flex-col justify-center">
+            <PainPoints />
+          </Reveal>
+        </section>
+
+        {/* Features */}
+        <section id="product" className="overflow-x-clip bg-paper">
           <div className="mx-auto max-w-6xl px-5 py-24">
             <Reveal className="max-w-2xl">
-              <Eyebrow>What we do</Eyebrow>
+              <Eyebrow>Product</Eyebrow>
               <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">
-                A lot of important work still runs on paper. We fix that, one team at a time.
+                One system for the whole building&apos;s day.
               </h2>
             </Reveal>
             <div className="mt-14 grid gap-6 md:grid-cols-3">
-              {PILLARS.map(({ icon: Icon, title, body }, i) => (
+              {FEATURES.map(({ icon: Icon, title, body }, i) => (
                 <Reveal key={title} delay={i * 120}>
-                  <div className="group h-full rounded-3xl border border-ink-200 bg-cream p-7 transition duration-300 hover:-translate-y-1 hover:border-forest-300 hover:shadow-xl hover:shadow-forest-900/5">
+                  <SpotlightCard className="h-full rounded-3xl border border-ink-200 bg-cream p-7 hover:border-forest-300 hover:shadow-xl hover:shadow-forest-900/5">
                     <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-forest-800 text-cream transition duration-300 group-hover:-rotate-6 group-hover:scale-110">
                       <Icon className="h-6 w-6" />
                     </span>
                     <h3 className="text-xl font-semibold text-forest-950">{title}</h3>
                     <p className="mt-3 leading-relaxed text-ink-700">{body}</p>
-                  </div>
+                  </SpotlightCard>
                 </Reveal>
               ))}
             </div>
-
             <Reveal className="mt-20">
-              <div className="mb-6">
-                <h3 className="text-2xl font-semibold text-forest-950 sm:text-3xl">Same day, two ways.</h3>
+              <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+                <div className="max-w-2xl">
+                  <h3 className="text-2xl font-semibold text-forest-950 sm:text-3xl">Try it yourself.</h3>
+                  <p className="mt-3 text-lg leading-relaxed text-ink-700">
+                    A manager website and a staff phone app, sharing one live system. Pick a team and tap through their day.
+                  </p>
+                </div>
+                <span className="rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">Interactive demo</span>
               </div>
-              <BeforeAfter />
+              <ProductTour />
             </Reveal>
           </div>
         </section>
 
-        {/* Product */}
-        <section id="product" className="overflow-hidden border-y border-ink-200/70 px-5 py-24">
-          <div className="mx-auto max-w-6xl">
-          <Reveal className="flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-2xl">
-              <Eyebrow>Quick interactive demo</Eyebrow>
-              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Discover More with Ophlow</h2>
-              <p className="mt-5 text-lg leading-relaxed text-ink-700">
-                A manager website and a staff phone app sharing one live system. We built it side by side with an assisted
-                living operations team, around the work they do every single day.
-              </p>
-            </div>
-            <span className="rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">
-              Try the demo below
-            </span>
-          </Reveal>
-
-          <Reveal className="mt-14">
-            <ProductTour />
-          </Reveal>
-
-          <Reveal className="mt-16 grid gap-5 lg:grid-cols-2">
-            <div className="flex gap-5 rounded-3xl bg-forest-900 p-7 text-cream">
-              <ShieldCheck className="h-8 w-8 shrink-0 text-rust-200" />
-              <div>
-                <h3 className="text-xl font-semibold">Private by design</h3>
-                <p className="mt-2 leading-relaxed text-forest-100">
-                  Ophlow works with room numbers only. Resident names and health information never go into the system,
-                  and each person sees only the screens for their job.
+        {/* Feature builder */}
+        <section id="build">
+          <div className="mx-auto max-w-6xl px-5 pt-24">
+            <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
+              <div className="max-w-2xl">
+                <Eyebrow>Build yours</Eyebrow>
+                <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Drag together the Ophlow your building needs.</h2>
+                <p className="mt-5 text-lg leading-relaxed text-ink-700">
+                  Every feature works on its own. Pick the ones your teams would use, put them in order, and bring them to your demo — we&apos;ll
+                  show you exactly those.
                 </p>
               </div>
-            </div>
-            <div className="rounded-3xl border border-ink-200 bg-paper p-7">
-              <h3 className="text-xl font-semibold text-forest-950">What we measure in the pilot</h3>
-              <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
-                {MEASURES.map((m) => (
-                  <li key={m} className="flex items-start gap-2.5 text-[15px] text-ink-700">
-                    <Timer className="mt-0.5 h-4 w-4 shrink-0 text-forest-600" />
-                    {m}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
+              <span className="rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">Drag &amp; drop</span>
+            </Reveal>
+            <Reveal>
+              <FeatureBuilder />
+            </Reveal>
           </div>
         </section>
 
         {/* How we work */}
-        <section id="how" className="bg-paper">
+        <section id="how">
           <div className="mx-auto max-w-6xl px-5 py-24">
             <Reveal className="max-w-2xl">
               <Eyebrow>How we work</Eyebrow>
@@ -288,31 +262,22 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Where we're going */}
-        <section id="next" className="bg-forest-950 text-cream">
-          <div className="mx-auto max-w-6xl px-5 py-24">
-            <Reveal className="max-w-3xl">
-              <Eyebrow light>Where we&apos;re going</Eyebrow>
-              <h2 className="text-3xl font-semibold leading-tight sm:text-5xl">
-                One approach for the day-to-day work in any company.
-              </h2>
-              <p className="mt-6 text-lg leading-relaxed text-forest-100">
-                Hotels, restaurants, assisted living communities and many other companies share the same challenge: daily
-                work is spread across paper, messages and shift handoffs. Ophlow brings those tasks into one clear system,
-                shaped around how each team works.
-              </p>
+        {/* FAQ */}
+        <section id="faq" className="bg-paper">
+          <div className="mx-auto max-w-3xl px-5 py-24">
+            <Reveal>
+              <Eyebrow>FAQ</Eyebrow>
+              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Questions we hear a lot.</h2>
             </Reveal>
-            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {MARKETS.map(({ icon: Icon, title, body }, i) => (
-                <Reveal key={title} delay={i * 90} className="h-full">
-                  <SpotlightCard
-                    className="h-full rounded-3xl bg-forest-900/70 p-6 ring-1 ring-forest-700"
-                  >
-                    <Icon className="h-7 w-7 text-forest-300" />
-                    <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-forest-200">{body}</p>
-                  </SpotlightCard>
-                </Reveal>
+            <div className="mt-10 divide-y divide-ink-200 border-y border-ink-200">
+              {FAQS.map(({ q, a }) => (
+                <details key={q} className="group py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-semibold text-forest-950 [&::-webkit-details-marker]:hidden">
+                    {q}
+                    <Plus className="h-5 w-5 shrink-0 text-forest-600 transition group-open:rotate-45" />
+                  </summary>
+                  <p className="mt-3 leading-relaxed text-ink-700">{a}</p>
+                </details>
               ))}
             </div>
           </div>
@@ -323,51 +288,49 @@ export default function Home() {
           <Reveal>
             <Eyebrow>About Ophlow</Eyebrow>
             <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">
-              Small, hands-on, and just getting started.
+              Small team, built on the floor.
             </h2>
           </Reveal>
           <Reveal delay={120} className="space-y-5 text-lg leading-relaxed text-ink-700">
             <p>
-              Ophlow started inside an assisted living community, where we worked with its operations team to bring paper,
-              whiteboards and phone calls into one live system. That first product was built for senior living, while the
-              underlying approach applies to day-to-day operations in many kinds of companies.
+              Ophlow started inside an assisted living community, working shoulder-to-shoulder with its operations team.
+              We&apos;re a small team of builders — we make software alongside the people who use it.
             </p>
             <p>
-              We&apos;re a small team that builds software alongside the people who use it, and we&apos;re growing. We&apos;re
-              looking for design partners in every industry where the real work happens away from a desk.
+              Today that&apos;s senior living; the same approach fits hotels, restaurants, and anywhere the day runs on
+              paper. We&apos;re looking for design partners who run buildings where the real work happens away from a desk.
             </p>
           </Reveal>
         </section>
 
-        {/* Contact */}
-        <section id="contact" className="mx-auto max-w-6xl px-5 pb-24">
+        {/* Final CTA */}
+        <section id="demo" className="mx-auto max-w-6xl scroll-mt-20 px-5 pb-24">
           <Reveal>
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-rust-500 px-8 py-16 text-center text-white sm:px-16">
-            <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 animate-float rounded-full bg-rust-400/60 blur-2xl" />
-            <div aria-hidden className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 animate-float rounded-full bg-rust-700/50 blur-2xl [animation-delay:-3.5s]" />
-            <div className="relative">
-              <h2 className="text-3xl font-semibold sm:text-5xl">Book a demo</h2>
-              <p className="mx-auto mt-5 max-w-2xl text-lg text-rust-50">
-                Pilot partners, investors and future teammates: we&apos;d love to hear from you.
-              </p>
-              <CopyEmail />
+            <div className="relative overflow-hidden rounded-[2.5rem] bg-rust-500 px-8 py-16 text-center text-white sm:px-16">
+              <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 animate-float rounded-full bg-rust-400/60 blur-2xl" />
+              <div aria-hidden className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 animate-float rounded-full bg-rust-700/50 blur-2xl [animation-delay:-3.5s]" />
+              <div className="relative">
+                <h2 className="text-3xl font-semibold sm:text-5xl">See your building&apos;s day, clearly.</h2>
+                <p className="mx-auto mt-5 max-w-2xl text-lg text-rust-50">
+                  Book a 20-minute demo, or get started and tell us about your building — we&apos;ll show you the pilot running live.
+                </p>
+                <div className="mt-9">
+                  <Ctas center light />
+                </div>
+                <p className="mx-auto mt-8 max-w-xl text-sm text-rust-50">
+                  Pilot partners, investors, and future teammates: we&apos;d love to hear from you —{" "}
+                  <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-1 font-semibold text-white underline underline-offset-4">
+                    <Mail className="h-3.5 w-3.5" />
+                    {SITE.email}
+                  </a>
+                </p>
+              </div>
             </div>
-          </div>
           </Reveal>
         </section>
       </main>
 
-      <footer className="border-t border-ink-200/70">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-5 py-10 sm:flex-row sm:items-center">
-          <Logo />
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <p className="text-sm text-ink-500">
-              © {new Date().getFullYear()} {SITE.name}. {SITE.tagline}
-            </p>
-            <a href="/blog" className="text-sm font-medium text-forest-800 transition hover:text-rust-600">Blog</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

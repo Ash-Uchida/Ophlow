@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Caveat, Inter, Source_Serif_4 } from "next/font/google";
+import { NavTracker } from "@/components/back-link";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -25,11 +26,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${serif.variable} ${hand.variable} antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${serif.variable} ${hand.variable} antialiased`}>
       <body className="bg-cream text-ink-800">
         <noscript>
           <style>{".reveal{opacity:1!important;transform:none!important}"}</style>
         </noscript>
+        <NavTracker />
         {children}
       </body>
     </html>

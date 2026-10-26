@@ -1,7 +1,6 @@
 import {
   ArrowRight,
   BarChart3,
-  CalendarDays,
   ClipboardList,
   Footprints,
   Mail,
@@ -12,10 +11,11 @@ import {
   Users,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import Link from "next/link";
+import { Ctas } from "@/components/ctas";
+import { FeatureBuilder } from "@/components/feature-builder";
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { LiveMock } from "@/components/live-mock";
-import { Logo } from "@/components/logo";
 import { PainPoints } from "@/components/pain-points";
 import { PilotMeasures } from "@/components/pilot-measures";
 import { ProductTour } from "@/components/product-tour";
@@ -130,20 +130,12 @@ export default function Home() {
                 Ophlow gives your housekeeping, dining, and maintenance teams one simple system — big buttons, timestamps,
                 no training manual. Managers finally see where the day goes.
               </p>
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-                <a
-                  href="#demo"
-                  className="group inline-flex items-center gap-2 rounded-full bg-forest-800 px-6 py-3.5 text-sm font-semibold text-cream shadow-lg shadow-forest-900/20 transition hover:-translate-y-0.5 hover:bg-forest-900 hover:shadow-xl"
-                >
-                  <CalendarDays className="h-4 w-4" /> Book a demo
-                </a>
-                <a
-                  href="#how"
-                  className="group inline-flex items-center gap-2 rounded-full border border-ink-300 bg-paper px-6 py-3.5 text-sm font-semibold text-forest-900 transition hover:-translate-y-0.5 hover:border-forest-400"
-                >
-                  See how it works <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-                </a>
+              <div className="mt-9">
+                <Ctas center />
               </div>
+              <a href="#build" className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800 hover:text-rust-600">
+                Or build your own Ophlow <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </a>
             </div>
             <div className="mx-auto mt-16 max-w-xl animate-rise [animation-delay:150ms]">
               <LiveMock />
@@ -182,7 +174,7 @@ export default function Home() {
         </section>
 
         {/* Features */}
-        <section id="product" className="bg-paper">
+        <section id="product" className="overflow-x-clip bg-paper">
           <div className="mx-auto max-w-6xl px-5 py-24">
             <Reveal className="max-w-2xl">
               <Eyebrow>Product</Eyebrow>
@@ -214,6 +206,26 @@ export default function Home() {
                 <span className="rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">Interactive demo</span>
               </div>
               <ProductTour />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Feature builder */}
+        <section id="build">
+          <div className="mx-auto max-w-6xl px-5 pt-24">
+            <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
+              <div className="max-w-2xl">
+                <Eyebrow>Build yours</Eyebrow>
+                <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Drag together the Ophlow your building needs.</h2>
+                <p className="mt-5 text-lg leading-relaxed text-ink-700">
+                  Every feature works on its own. Pick the ones your teams would use, put them in order, and bring them to your demo — we&apos;ll
+                  show you exactly those.
+                </p>
+              </div>
+              <span className="rounded-full bg-forest-100 px-4 py-2 text-sm font-semibold text-forest-800">Drag &amp; drop</span>
+            </Reveal>
+            <Reveal>
+              <FeatureBuilder />
             </Reveal>
           </div>
         </section>
@@ -300,14 +312,11 @@ export default function Home() {
               <div className="relative">
                 <h2 className="text-3xl font-semibold sm:text-5xl">See your building&apos;s day, clearly.</h2>
                 <p className="mx-auto mt-5 max-w-2xl text-lg text-rust-50">
-                  Book a 20-minute demo — we&apos;ll show you the pilot running live.
+                  Book a 20-minute demo, or get started and tell us about your building — we&apos;ll show you the pilot running live.
                 </p>
-                <a
-                  href={SITE.demoUrl}
-                  className="group mt-9 inline-flex items-center gap-2 rounded-full bg-cream px-7 py-4 text-sm font-semibold text-forest-900 shadow-xl transition hover:-translate-y-0.5 hover:bg-white"
-                >
-                  <CalendarDays className="h-4 w-4 transition group-hover:-rotate-12" /> Book a demo
-                </a>
+                <div className="mt-9">
+                  <Ctas center light />
+                </div>
                 <p className="mx-auto mt-8 max-w-xl text-sm text-rust-50">
                   Pilot partners, investors, and future teammates: we&apos;d love to hear from you —{" "}
                   <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-1 font-semibold text-white underline underline-offset-4">
@@ -321,17 +330,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-ink-200/70">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-5 py-10 sm:flex-row sm:items-center">
-          <Logo />
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <p className="text-sm text-ink-500">
-              © {new Date().getFullYear()} {SITE.name}. {SITE.tagline}
-            </p>
-            <Link href="/blog" className="text-sm font-medium text-forest-800 transition hover:text-rust-600">Blog</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

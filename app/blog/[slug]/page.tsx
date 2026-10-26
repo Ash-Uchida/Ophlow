@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/reveal";
 import { getAllPosts, getPost } from "@/lib/blog";
@@ -54,15 +55,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           </Reveal>
         </article>
       </main>
-      <footer className="border-t border-ink-200/70">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 text-sm text-ink-500">
-          <p>© {new Date().getFullYear()} Ophlow. Operations software, built on the floor.</p>
-          <div className="flex items-center gap-5">
-            <Link href="/blog" className="font-medium text-forest-800 hover:text-rust-600">Blog</Link>
-            <Link href="/" className="font-medium text-forest-800 hover:text-rust-600">Back to Ophlow</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

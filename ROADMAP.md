@@ -60,10 +60,38 @@ Options, simplest first:
 
 *Done when:* each of these has been tried once and anything broken is fixed.
 
-### 5. Housekeeping
+### 5. Move the site into the Ophlow GitHub organization
+
+The site lives in `Ash-Uchida/Ophlow`, a personal account. Moving it into the existing Ophlow organization means
+the company owns the code, teammates can be added in one place, and it sits next to the Living-Assistance product
+repo.
+
+**Recommended: transfer the repo.** In `Ash-Uchida/Ophlow` → Settings → Danger Zone → **Transfer** → the Ophlow
+organization (rename it at the same time if wanted, e.g. `website`). This keeps commits, pull requests #1–#10, Actions
+history and the Pages settings, and old links redirect automatically.
+
+**Alternative: a new repo in the organization**, with the code and every branch pushed to it. Pull requests and
+Actions history stay behind on the old repo, and old links don't redirect. Only one repo can own ophlow.com, so
+the order matters (the site can be down for a few minutes between steps 3 and 5):
+
+1. Create the empty repo in the organization.
+2. Push the code and all branches to it.
+3. Old repo: Settings → Pages, remove the custom domain (or turn Pages off), then archive the repo.
+4. New repo: Settings → Pages → Source **GitHub Actions**, custom domain `ophlow.com`.
+5. Merge anything to `main` to deploy, then check ophlow.com loads.
+
+Either way, afterwards:
+
+- [ ] Point the local folder at the new repo (`git remote set-url origin …`).
+- [ ] Check Settings → Pages still shows `ophlow.com` with HTTPS, and re-save the domain if it warns.
+- [ ] Merge one small change and check it deploys.
+- [ ] Rename the local folder to match the repo (it's `landing-page-living-assistance` today).
+- [ ] Move Living-Assistance into the organization the same way.
+
+*Done when:* ophlow.com deploys from the organization's repo and nothing points at `Ash-Uchida/Ophlow` any more.
+
+### 6. Housekeeping
 
 - [ ] Archive the old "landing page living-assistance" chat, which still points to the old folder
       (`Landing-page-ophlow`).
 - [ ] Use a fresh branch per change instead of reusing `codex/landing-rewrite`.
-- [ ] Decide if the folder name (`landing-page-living-assistance`) and the repo it publishes from
-      (`Ash-Uchida/Ophlow`) should match.

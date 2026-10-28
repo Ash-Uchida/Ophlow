@@ -1,4 +1,4 @@
-import { intakeGroups, validIntake, type Intake } from "@/lib/intake";
+import { emptyIntake, intakeGroups, validIntake, type Intake } from "@/lib/intake";
 import { NOTIFY_TO, rowsToHtml, rowsToText, sendEmail } from "@/lib/server/email";
 import { leadsConnected, saveSetup } from "@/lib/server/leads";
 
@@ -19,8 +19,13 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, fallback: true });
   }
 
-  const title = `New setup form: ${body.community}`;
-  const groups = intakeGroups(body);
-  await sendEmail({ to: NOTIFY_TO, replyTo: body.email, subject: title, html: rowsToHtml(title, groups), text: rowsToText(title, groups) });
+  // It's saved; the email is a bonus. Missing answers become blanks so the email can't fail on them.
+  try {
+    const title = `New setup form: ${body.community}`;
+    const groups = intakeGroups({ ...emptyIntake(), ...body });
+    await sendEmail({ to: NOTIFY_TO, replyTo: body.email, subject: title, html: rowsToHtml(title, groups), text: rowsToText(title, groups) });
+  } catch (error) {
+    console.error("emailing the setup form failed", error);
+  }
   return Response.json({ ok: true });
 }

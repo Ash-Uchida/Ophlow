@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, ArrowRight, Check, Copy, Loader2, Lock, Mail, Plus, Send, Trash2 } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { useState } from "react";
 import { BackLink } from "@/components/back-link";
 import { TimeZonePicker, useDetectedTimeZone } from "@/components/time-zone-picker";
@@ -61,7 +62,10 @@ export function IntakeWizard({ intake, setIntake, step, setStep }: Props) {
       const res = await fetch("/api/onboarding", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(intake) });
       const reply = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(reply.error);
-      if (reply.ok) return setResult("sent");
+      if (reply.ok) {
+        track("Setup form sent");
+        return setResult("sent");
+      }
       throw new Error();
     } catch (problem) {
       if (problem instanceof Error && problem.message) return setError(problem.message);

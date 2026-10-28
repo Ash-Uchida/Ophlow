@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Caveat, Inter, Source_Serif_4 } from "next/font/google";
 import { NavTracker } from "@/components/back-link";
@@ -8,7 +9,11 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const serif = Source_Serif_4({ variable: "--font-serif-display", subsets: ["latin"] });
 const hand = Caveat({ variable: "--font-caveat", subsets: ["latin"] });
 
+/** Absolute links for share previews: Vercel's production domain (e.g. ophlow.com once DNS points there). */
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: `${SITE.name} — ${SITE.tagline}`,
   description: SITE.description,
   icons: {
@@ -22,6 +27,7 @@ export const metadata: Metadata = {
     description: SITE.description,
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -33,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
         <NavTracker />
         {children}
+        <Analytics />
       </body>
     </html>
   );

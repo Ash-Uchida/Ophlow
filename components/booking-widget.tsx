@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, CalendarCheck, ChevronLeft, ChevronRight, Loader2, Mail, X } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { useEffect, useMemo, useState } from "react";
 import { BackLink } from "@/components/back-link";
 import { TimeZonePicker, useDetectedTimeZone } from "@/components/time-zone-picker";
@@ -90,7 +91,10 @@ export function BookingWidget() {
         return;
       }
       if (!res.ok) throw new Error(reply.error);
-      if (reply.ok) return setDone({ kind: "sent" });
+      if (reply.ok) {
+        track("Demo booked");
+        return setDone({ kind: "sent" });
+      }
       throw new Error();
     } catch (problem) {
       if (problem instanceof Error && problem.message) return setError(problem.message);
@@ -291,6 +295,7 @@ export function BookingWidget() {
                         type="button"
                         onClick={() => {
                           setSlot(s);
+                          track("Demo time picked");
                           setError(null);
                         }}
                         className="rounded-xl border border-forest-200 px-4 py-2.5 text-sm font-semibold text-forest-800 transition hover:border-forest-500 hover:bg-forest-50"

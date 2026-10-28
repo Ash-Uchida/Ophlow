@@ -46,8 +46,9 @@ check Supabase for new rows.
 
 ### 2. Know whether anyone uses it
 
-- [ ] Add privacy-friendly analytics (Plausible or GoatCounter): visits, Build yours use, Book a demo clicks,
-      booking confirmations, setup form sends.
+- [x] Vercel Web Analytics in the code (no cookies), with events: "Demo time picked", "Demo booked",
+      "Setup form sent".
+- [ ] **You:** Vercel → ophlow-landing-page → **Analytics** → Enable. Nothing is counted until it's on.
 
 *Done when:* we can see last week's visits and how many people started vs finished a booking.
 
@@ -61,13 +62,36 @@ check Supabase for new rows.
 
 ### 4. Test what hasn't been tested
 
-- [ ] Drag-and-drop on a real phone and tablet (tap-to-add and the arrow buttons are the touch fallback).
-- [ ] The booking email opening in Apple Mail, Outlook and Gmail.
-- [ ] Safari and Firefox (only Chrome has been checked).
+- [x] Automated run on the live site (2026-10-28): Chrome, Safari and Firefox on desktop, plus iPhone and Android
+      phone emulation. Pages, no sideways scrolling, Build yours (click, tap, drag), workspace phone view and a
+      full booking all pass.
+- [ ] Drag-and-drop on a real phone and tablet (emulation passed; tap-to-add and the arrow buttons are the touch
+      fallback).
+- [ ] The fallback booking email opening in Apple Mail, Outlook and Gmail (only used if the database is down).
 
 *Done when:* each of these has been tried once and anything broken is fixed.
 
-### 5. Move the site into the Ophlow GitHub organization — *done*: now `Ophlow-com/Ophlow-landing-page`
+### 5. Before promoting it
+
+- [ ] **Privacy policy + terms** pages, linked in the footer: the forms collect names, work emails and phone numbers.
+      **You:** approve the text.
+- [ ] **Confirmation email to the visitor** after booking (time in their zone + a calendar file). Needs Resend with
+      ophlow.com verified (a few GoDaddy records); one verification covers the restaurant site too.
+- [x] **Share image + page descriptions**, so links look right in texts, Slack and LinkedIn.
+- [ ] Rate limit per IP on `/api/book` and `/api/onboarding` (Vercel Firewall rule), only if spam gets past the
+      hidden spam-trap field.
+
+### 6. Later: the bigger pieces
+
+Same plan as the restaurant site's roadmap (Steps 4, 7 and 8 there), done once and reused:
+
+- [ ] **Team calendars:** Google Calendar free/busy hides times the team is busy; booking sends a real invite with a
+      Meet link.
+- [ ] **Take payment:** "Get started" → Stripe Checkout → back to `/workspace`; a billing link for customers.
+- [ ] **File uploads → real workspace:** the setup form takes checklists and schedules (Supabase Storage); at
+      sign-up each community gets its own empty copy of the product, and `/workspace` links into it.
+
+### 7. Move the site into the Ophlow GitHub organization — *done*: now `Ophlow-com/Ophlow-landing-page`
 
 The site lives in `Ash-Uchida/Ophlow`, a personal account. Moving it into the existing Ophlow organization means
 the company owns the code, teammates can be added in one place, and it sits next to the Living-Assistance product
@@ -97,7 +121,7 @@ Either way, afterwards:
 
 *Done when:* ophlow.com deploys from the organization's repo and nothing points at `Ash-Uchida/Ophlow` any more.
 
-### 6. Housekeeping
+### 8. Housekeeping
 
 - [ ] Archive the old "landing page living-assistance" chat, which still points to the old folder
       (`Landing-page-ophlow`).

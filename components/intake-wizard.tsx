@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, Check, Copy, Lock, Mail, Plus, Send, Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Copy, Loader2, Lock, Mail, Plus, Send, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { BackLink } from "@/components/back-link";
 import { TimeZonePicker, useDetectedTimeZone } from "@/components/time-zone-picker";
@@ -35,7 +35,9 @@ const MAILTO_BODY_LIMIT = 1800;
 
 export function IntakeWizard({ intake, setIntake, step, setStep }: Props) {
   const detected = useDetectedTimeZone();
-  const [sent, setSent] = useState(false);
+  const [result, setResult] = useState<"sent" | "fallback" | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
   const set = <K extends keyof Intake>(key: K, value: Intake[K]) => setIntake({ ...intake, [key]: value });
@@ -45,14 +47,57 @@ export function IntakeWizard({ intake, setIntake, step, setStep }: Props) {
   const last = step === STEPS.length - 1;
   const firstStepDone = intake.community.trim() && intake.contactName.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(intake.email);
 
-  // The site is static: answers go to us as a pre-filled email, with copy as the backup.
+  // The fallback when the database can't be reached: a pre-filled email, with copy as the backup.
   const mailto = () => {
     const text = intakeText(intake);
     const body = text.length <= MAILTO_BODY_LIMIT ? `${text}\n` : "Paste your copied answers here.\n\n";
     return `mailto:${SITE.email}?subject=${encodeURIComponent(`Setup for ${intake.community}`)}&body=${encodeURIComponent(body)}`;
   };
 
-  if (sent) {
+  const submit = async () => {
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/onboarding", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(intake) });
+      const reply = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(reply.error);
+      if (reply.ok) return setResult("sent");
+      throw new Error();
+    } catch (problem) {
+      if (problem instanceof Error && problem.message) return setError(problem.message);
+      setResult("fallback");
+      window.location.assign(mailto());
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  if (result === "sent") {
+    return (
+      <div className="animate-rise rounded-3xl border border-ink-200 bg-paper p-7 text-center sm:p-10">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-forest-100 text-forest-800">
+          <Check className="h-7 w-7" />
+        </span>
+        <h2 className="mt-5 text-3xl font-semibold text-forest-950">Got it — thank you!</h2>
+        <p className="mx-auto mt-3 max-w-md leading-relaxed text-ink-700">
+          We&apos;ll email {intake.email} within one business day to plan your setup. If you have checklists, schedules or spreadsheets you use
+          today, send them to{" "}
+          <a className="font-semibold text-forest-800 underline" href={`mailto:${SITE.email}?subject=${encodeURIComponent(`Files for ${intake.community}`)}`}>
+            {SITE.email}
+          </a>
+          .
+        </p>
+        <button type="button" onClick={() => setResult(null)} className="mt-6 text-sm font-semibold text-ink-500 hover:text-forest-800">
+          Edit my answers
+        </button>
+        <div className="mt-3">
+          <BackLink label="Back to site" className="text-sm text-ink-500 hover:text-forest-800" />
+        </div>
+      </div>
+    );
+  }
+
+  if (result === "fallback") {
     return (
       <div className="animate-rise rounded-3xl border border-ink-200 bg-paper p-7 text-center sm:p-10">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-forest-100 text-forest-800">
@@ -77,7 +122,7 @@ export function IntakeWizard({ intake, setIntake, step, setStep }: Props) {
             <Mail className="h-4 w-4" /> Open email
           </a>
         </div>
-        <button type="button" onClick={() => setSent(false)} className="mt-6 text-sm font-semibold text-ink-500 hover:text-forest-800">
+        <button type="button" onClick={() => setResult(null)} className="mt-6 text-sm font-semibold text-ink-500 hover:text-forest-800">
           Edit my answers
         </button>
         <div className="mt-3">
@@ -117,8 +162,7 @@ export function IntakeWizard({ intake, setIntake, step, setStep }: Props) {
         onSubmit={(e) => {
           e.preventDefault();
           if (!last) return setStep(step + 1);
-          setSent(true);
-          window.location.assign(mailto());
+          void submit();
         }}
       >
         <div key={step} className="grid animate-rise gap-5 sm:grid-cols-2">
@@ -345,13 +389,15 @@ export function IntakeWizard({ intake, setIntake, step, setStep }: Props) {
           </button>
           <button
             type="submit"
-            className="inline-flex items-center gap-2 rounded-full bg-forest-800 px-6 py-3 text-sm font-semibold text-cream transition hover:bg-forest-900"
+            disabled={busy}
+            className="inline-flex items-center gap-2 rounded-full bg-forest-800 px-6 py-3 text-sm font-semibold text-cream transition hover:bg-forest-900 disabled:opacity-60"
           >
-            {last ? <Send className="h-4 w-4" /> : null}
-            {last ? "Send to the Ophlow team" : "Next"}
-            {!last ? <ArrowRight className="h-4 w-4" /> : null}
+            {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : last ? <Send className="h-4 w-4" /> : null}
+            {busy ? "Sending…" : last ? "Send to the Ophlow team" : "Next"}
+            {!last && !busy ? <ArrowRight className="h-4 w-4" /> : null}
           </button>
         </div>
+        {error ? <p className="mt-4 text-right text-sm font-semibold text-rust-600">{error}</p> : null}
       </form>
     </div>
   );

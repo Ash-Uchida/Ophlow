@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowLeft, ChevronLeft, ChevronRight, Loader2, Mail, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { ArrowLeft, CalendarCheck, ChevronLeft, ChevronRight, Loader2, Mail, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { BackLink } from "@/components/back-link";
 import { TimeZonePicker, useDetectedTimeZone } from "@/components/time-zone-picker";
 import { useUrlFeatures } from "@/components/use-url-features";
@@ -18,8 +18,16 @@ const input =
 
 export function BookingWidget() {
   const detected = useDetectedTimeZone();
-  // Slots come from our hours (lib/site.ts). Worked out once in the browser, so "now" is the visitor's now.
-  const slots = useMemo(() => (detected === undefined ? null : openSlots([])), [detected]);
+  // Our hours (lib/site.ts) minus demos already booked, from the server. If it can't be reached, just our hours.
+  const [slots, setSlots] = useState<Interval[] | null>(null);
+  const loadSlots = () =>
+    fetch("/api/availability", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d: { slots: Interval[] }) => setSlots(d.slots))
+      .catch(() => setSlots(openSlots([])));
+  useEffect(() => {
+    void loadSlots();
+  }, []);
   const [chosenZone, setZone] = useState<string | null>(null);
   const zone = chosenZone ?? detected ?? AVAILABILITY.timeZone;
   const [month, setMonth] = useState<{ y: number; m: number } | null>(null);
@@ -29,7 +37,10 @@ export function BookingWidget() {
   const picked = useUrlFeatures();
   const [dropped, setDropped] = useState<string[]>([]);
   const features = picked.filter((id) => !dropped.includes(id));
-  const [mailto, setMailto] = useState<string | null>(null);
+  const [done, setDone] = useState<{ kind: "sent" } | { kind: "fallback"; mailto: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [website, setWebsite] = useState("");
 
   const byDay = useMemo(() => {
     const map = new Map<string, Interval[]>();
@@ -63,15 +74,66 @@ export function BookingWidget() {
     setMonth({ y: d.getUTCFullYear(), m: d.getUTCMonth() });
   };
 
-  const submit = () => {
+  const submit = async () => {
     if (!slot) return;
     const booking: Booking = { ...form, start: slot.start, end: slot.end, timeZone: zone, features: features.map((id) => FEATURE_BY_ID[id].name) };
-    const link = bookingMailto(booking);
-    setMailto(link);
-    window.location.assign(link);
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/book", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ...booking, website }) });
+      const reply = await res.json().catch(() => ({}));
+      if (res.status === 409) {
+        // Someone else got that time: drop it from the calendar and send them back to pick again.
+        setError(reply.error ?? "That time was just taken. Please pick another.");
+        setSlot(null);
+        void loadSlots();
+        return;
+      }
+      if (!res.ok) throw new Error(reply.error);
+      if (reply.ok) return setDone({ kind: "sent" });
+      throw new Error();
+    } catch (problem) {
+      if (problem instanceof Error && problem.message) return setError(problem.message);
+      // Server or database unreachable: fall back to a pre-filled email so the booking isn't lost.
+      const link = bookingMailto(booking);
+      setDone({ kind: "fallback", mailto: link });
+      window.location.assign(link);
+    } finally {
+      setBusy(false);
+    }
   };
 
-  if (mailto && slot) {
+  if (done?.kind === "sent" && slot) {
+    return (
+      <div className="mx-auto max-w-xl animate-rise rounded-[2rem] border border-ink-200 bg-paper p-8 text-center shadow-xl shadow-forest-900/5 sm:p-10">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-forest-100 text-forest-800">
+          <CalendarCheck className="h-7 w-7" />
+        </span>
+        <h2 className="mt-5 text-3xl font-semibold text-forest-950">You&apos;re booked.</h2>
+        <p className="mt-3 text-ink-700">{describe(slot.start, zone)}</p>
+        <p className="mt-4 leading-relaxed text-ink-600">We&apos;ve got it and will email {form.email} the video link before the call.</p>
+        <a
+          href={googleCalendarLink({
+            start: slot.start,
+            end: slot.end,
+            summary: `${SITE.name} demo`,
+            details: `${AVAILABILITY.slotMinutes}-minute demo with the ${SITE.name} team. Questions: ${SITE.email}`,
+          })}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-6 inline-flex items-center gap-2 rounded-full bg-forest-800 px-6 py-3.5 text-sm font-semibold text-cream hover:bg-forest-900"
+        >
+          <CalendarCheck className="h-4 w-4" /> Add to my Google Calendar
+        </a>
+        <div className="mt-5">
+          <BackLink className="text-sm text-ink-600 hover:text-forest-800" />
+        </div>
+      </div>
+    );
+  }
+
+  if (done?.kind === "fallback" && slot) {
+    const mailto = done.mailto;
     return (
       <div className="mx-auto max-w-xl animate-rise rounded-[2rem] border border-ink-200 bg-paper p-8 text-center shadow-xl shadow-forest-900/5 sm:p-10">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-forest-100 text-forest-800">
@@ -99,7 +161,7 @@ export function BookingWidget() {
         >
           Add to my Google Calendar
         </a>
-        <button type="button" onClick={() => setMailto(null)} className="mt-4 text-sm font-semibold text-ink-500 hover:text-forest-800">
+        <button type="button" onClick={() => setDone(null)} className="mt-4 text-sm font-semibold text-ink-500 hover:text-forest-800">
           Edit my details
         </button>
         <div className="mt-3">
@@ -159,6 +221,7 @@ export function BookingWidget() {
               <p className="font-serif text-xl font-semibold text-forest-950">Pick a day and time</p>
               <TimeZonePicker value={zone} onChange={setZone} detected={detected} className="w-full sm:w-80" />
             </div>
+            {error ? <p className="mb-5 rounded-2xl bg-rust-50 p-4 text-sm font-semibold text-rust-700">{error}</p> : null}
 
             {!slots ? (
               <p className="flex items-center gap-2 py-16 text-sm text-ink-500">
@@ -226,7 +289,10 @@ export function BookingWidget() {
                       <button
                         key={s.start}
                         type="button"
-                        onClick={() => setSlot(s)}
+                        onClick={() => {
+                          setSlot(s);
+                          setError(null);
+                        }}
                         className="rounded-xl border border-forest-200 px-4 py-2.5 text-sm font-semibold text-forest-800 transition hover:border-forest-500 hover:bg-forest-50"
                       >
                         {formatInZone(s.start, zone, { hour: "numeric", minute: "2-digit" })}
@@ -242,7 +308,7 @@ export function BookingWidget() {
             className="p-6 sm:p-8"
             onSubmit={(e) => {
               e.preventDefault();
-              submit();
+              void submit();
             }}
           >
             <button type="button" onClick={() => setSlot(null)} className="mb-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink-600 hover:text-forest-800">
@@ -293,13 +359,26 @@ export function BookingWidget() {
                 />
               </Field>
             </div>
+            {/* Hidden from people; bots that fill every field get politely ignored. */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              className="absolute -left-[9999px] h-0 w-0 opacity-0"
+            />
+            {error ? <p className="mt-4 text-sm font-semibold text-rust-600">{error}</p> : null}
             <button
               type="submit"
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-forest-800 px-6 py-3.5 text-sm font-semibold text-cream transition hover:bg-forest-900 sm:w-auto"
+              disabled={busy}
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-forest-800 px-6 py-3.5 text-sm font-semibold text-cream transition hover:bg-forest-900 disabled:opacity-60 sm:w-auto"
             >
-              <Mail className="h-4 w-4" /> Confirm by email
+              {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <CalendarCheck className="h-4 w-4" />}
+              {busy ? "Booking…" : "Confirm demo"}
             </button>
-            <p className="mt-3 text-xs text-ink-500">Opens a pre-filled email to {SITE.email} with these details and the time in both zones.</p>
           </form>
         )}
       </div>

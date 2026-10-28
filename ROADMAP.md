@@ -3,39 +3,46 @@
 What's left to finish the public site at [ophlow.com](https://ophlow.com). The product itself has its own roadmap in
 the Living-Assistance repo.
 
-**Hosting today:** plain HTML on GitHub Pages, deployed on every merge to `main` (`.github/workflows/deploy.yml`).
-There is no server, so the site can't send email or read a calendar by itself.
+**Hosting:** moving from GitHub Pages to **Vercel** (team "Ash Uchida's projects", Pro), so the server routes in
+`app/api` can save bookings and setup forms. Until ophlow.com points at Vercel it keeps serving the last GitHub
+Pages build; the Pages deploy workflow is gone, so merges to `main` don't change it.
+
+**Data:** bookings and setup forms are saved in the **Living-Assistance** Supabase project, in a private `leads`
+schema (`supabase/leads.sql`). Read them in Supabase → Table Editor → schema `leads`.
 
 ## Live now
 
 | Page | What it does |
 | --- | --- |
 | `/` | Pitch, product tour, **Build yours** (drag-and-drop feature builder: click to add, click again to remove), FAQ. **Book a demo** and **Get started** everywhere. |
-| `/book` | Demo calendar in the visitor's time zone, built from our hours in `lib/site.ts` (`AVAILABILITY`). Confirming opens a pre-filled email to ophlow@gmail.com. |
-| `/workspace` | "Get started": an empty workspace with a 6-step setup form (saved in the browser). Opened from Build yours, it shows only the picked features, with a **Laptop / Phone** switch. |
+| `/book` | Demo calendar in the visitor's time zone, built from our hours in `lib/site.ts` (`AVAILABILITY`). Booked times disappear for everyone; confirming saves the booking (pre-filled email if the database can't be reached). |
+| `/workspace` | "Get started": an empty workspace with a 6-step setup form (draft saved in the browser, sent answers saved in Supabase). Opened from Build yours, it shows only the picked features, with a **Laptop / Phone** switch. |
 
 No customer is named. The site says it was built with an assisted living operations team, which is true; it no
 longer claims a live pilot.
 
 ## To do
 
-### 1. Make sure bookings and setup forms reach us — *most important*
+### 1. Go live on Vercel — *most important* · You
 
-Today both open the visitor's email app. Anyone without one set up (lots of people only use Gmail in the browser)
-clicks and nothing happens, and we never find out. Nothing checks our real calendar either, so two people can pick
-the same slot, and a long setup form is too big for the email (they have to paste their answers in).
+Code is done: bookings and setup forms save to Supabase, booked times are hidden, double-booking is refused, and the
+database can't be read from outside. What's left is account setup:
 
-Options, simplest first:
+- [ ] Vercel → **Add New → Project** → import `Ophlow-com/Ophlow-landing-page` into **Ash Uchida's projects (Pro)**.
+      Preset Next.js, root `./`.
+- [ ] Settings → Environment Variables: `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` (values in `.env.example` /
+      Supabase → Project Settings → API keys, Living-Assistance project) → redeploy.
+- [ ] On the `*.vercel.app` address: book a test demo and send a test setup form, check both rows in Supabase
+      (schema `leads`), then delete them.
+- [ ] Vercel → Project → **Domains** → add `ophlow.com` and `www.ophlow.com` → change the DNS records at your domain
+      registrar to the ones Vercel shows. The site can blink for a few minutes while DNS updates.
+- [ ] GitHub → `Ophlow-landing-page` → Settings → **Pages** → remove the custom domain and turn Pages off.
 
-- [ ] **Form service** (Web3Forms or Formspree, free tier). Works on GitHub Pages as-is; submissions land in
-      ophlow@gmail.com. Sign up with ophlow@gmail.com, put the access key in `lib/site.ts`, send booking and setup
-      forms there and keep the email link as the fallback. Doesn't stop double-booking.
-- [ ] **Real availability**: a Google Calendar appointment schedule or Cal.com, linked or embedded from `/book`.
-      Handles busy times and sends invites, but replaces (or sits inside) our own booking page.
-- [ ] **Move to Vercel** and copy the restaurant site's `/api/book`, `/api/availability` and `/api/onboarding`
-      routes (Resend for email, Google Calendar for availability). Most work, most complete.
+*Done when:* ophlow.com loads from Vercel and a test booking from a browser with no mail app shows up in Supabase.
 
-*Done when:* a test booking and a test setup form from a browser with no mail app land in ophlow@gmail.com.
+**Email alerts (optional, ≈15 min):** sign up at resend.com with ophlow@gmail.com → API key → Vercel env
+`RESEND_API_KEY` → redeploy. Each booking and setup form is then also emailed to ophlow@gmail.com. Without it,
+check Supabase for new rows.
 
 ### 2. Know whether anyone uses it
 
@@ -60,7 +67,7 @@ Options, simplest first:
 
 *Done when:* each of these has been tried once and anything broken is fixed.
 
-### 5. Move the site into the Ophlow GitHub organization
+### 5. Move the site into the Ophlow GitHub organization — *done*: now `Ophlow-com/Ophlow-landing-page`
 
 The site lives in `Ash-Uchida/Ophlow`, a personal account. Moving it into the existing Ophlow organization means
 the company owns the code, teammates can be added in one place, and it sits next to the Living-Assistance product
@@ -82,11 +89,11 @@ the order matters (the site can be down for a few minutes between steps 3 and 5)
 
 Either way, afterwards:
 
-- [ ] Point the local folder at the new repo (`git remote set-url origin …`).
-- [ ] Check Settings → Pages still shows `ophlow.com` with HTTPS, and re-save the domain if it warns.
-- [ ] Merge one small change and check it deploys.
+- [x] Point the local folder at the new repo (`git remote set-url origin …`).
+- [x] Check Settings → Pages still shows `ophlow.com` with HTTPS, and re-save the domain if it warns.
+- [x] ~~Merge one small change and check it deploys.~~ Replaced by the Vercel move (section 1).
 - [ ] Rename the local folder to match the repo (it's `landing-page-living-assistance` today).
-- [ ] Move Living-Assistance into the organization the same way.
+- [x] Move Living-Assistance into the organization the same way.
 
 *Done when:* ophlow.com deploys from the organization's repo and nothing points at `Ash-Uchida/Ophlow` any more.
 

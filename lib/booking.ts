@@ -42,10 +42,36 @@ export function bookingRows(b: Booking): [string, string][] {
   ];
 }
 
-/** The site is static, so a booking is a pre-filled email to us. */
+/** The fallback when the database isn't connected: a pre-filled email to us. */
 export function bookingMailto(b: Booking) {
   const body = bookingRows(b)
     .map(([k, v]) => `${k}: ${v || "—"}`)
     .join("\n");
   return `mailto:${SITE.email}?subject=${encodeURIComponent(bookingSummary(b))}&body=${encodeURIComponent(body)}`;
+}
+
+/** Server-side check: everything required is there and looks like what it should be. */
+export function validBooking(b: Partial<Booking> | null): b is Booking {
+  if (!b) return false;
+  const str = (v: unknown, max = 500) => typeof v === "string" && v.length <= max;
+  return (
+    str(b.start, 40) &&
+    str(b.end, 40) &&
+    !Number.isNaN(Date.parse(b.start!)) &&
+    str(b.timeZone, 80) &&
+    str(b.name, 120) &&
+    b.name!.trim().length > 0 &&
+    str(b.email, 200) &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email!) &&
+    str(b.community, 160) &&
+    b.community!.trim().length > 0 &&
+    str(b.phone ?? "", 40) &&
+    str(b.role ?? "", 80) &&
+    str(b.buildings ?? "", 40) &&
+    str(b.current ?? "", 80) &&
+    Array.isArray(b.features) &&
+    b.features.length <= 30 &&
+    b.features.every((f) => str(f, 80)) &&
+    str(b.notes ?? "", 2000)
+  );
 }

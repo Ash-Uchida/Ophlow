@@ -39,8 +39,13 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, fallback: true });
   }
 
-  const title = `New demo booked: ${b.community}`;
-  const groups = [{ rows: bookingRows(b) }];
-  await sendEmail({ to: NOTIFY_TO, replyTo: b.email, subject: title, html: rowsToHtml(title, groups), text: rowsToText(bookingSummary(b), groups) });
+  // It's booked; the email is a bonus.
+  try {
+    const title = `New demo booked: ${b.community}`;
+    const groups = [{ rows: bookingRows(b) }];
+    await sendEmail({ to: NOTIFY_TO, replyTo: b.email, subject: title, html: rowsToHtml(title, groups), text: rowsToText(bookingSummary(b), groups) });
+  } catch (error) {
+    console.error("emailing the booking failed", error);
+  }
   return Response.json({ ok: true });
 }

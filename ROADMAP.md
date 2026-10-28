@@ -10,6 +10,30 @@ Pages build; the Pages deploy workflow is gone, so merges to `main` don't change
 **Data:** bookings and setup forms are saved in the **Living-Assistance** Supabase project, in a private `leads`
 schema (`supabase/leads.sql`). Read them in Supabase → Table Editor → schema `leads`.
 
+## Your to-dos
+
+Account steps only you can do, for both landing pages (and the apps), most important first. Tell Claude when one is
+done and it does the follow-up.
+
+- [ ] **GoDaddy DNS:** sign in to GoDaddy in Claude's browser pane and say "go". Claude switches ophlow.com to Vercel
+      (section 1), and can add a restaurant address (e.g. `restaurants.ophlow.com`) and the Resend domain records in
+      the same sitting. Then turn off GitHub Pages: repo → Settings → Pages.
+- [ ] **Turn on Analytics:** Vercel → `ophlow-landing-page` and `ophlow-restaurants` → **Analytics** → Enable.
+- [ ] **Review the privacy policy and terms drafts:** pull requests Ophlow-landing-page #14 and
+      Landing-page-Restuarant #4. Check the 1-year keep period and the 30-day reply promise, then merge.
+- [ ] **Resend:** sign up at resend.com with ophlow@gmail.com → API key → add `RESEND_API_KEY` in both Vercel projects
+      (Settings → Environment Variables) → redeploy. Every booking and setup form is then emailed to you.
+- [ ] **Leaked password protection** (for the apps' staff sign-ins, not the landing pages; needs Supabase Pro, which
+      you have): supabase.com → **Living-Assistance** → Authentication → Sign In / Providers (or Attack Protection)
+      → Email → turn on **Prevent use of leaked passwords** → Save. Then the same in **Righteous-Slice**. Existing
+      passwords keep working; it applies the next time someone sets one. Afterwards Claude can rerun Supabase's
+      security check to confirm the warning is gone.
+- [ ] **Restaurant site decisions:** product name, demo hours, pricing wording, whether "Get started" is self-serve.
+- [ ] **Social proof:** one real quote or number for each site, with the person's OK.
+- [ ] **Try both sites on your own phone:** Build yours (drag and tap) and a test booking.
+- [ ] **Vercel tools for Claude:** in a Claude Code terminal, run `/mcp` → vercel → approve.
+- [ ] **Archive the old "landing page living-assistance" chat**, which still points to the old folder.
+
 ## Live now
 
 | Page | What it does |

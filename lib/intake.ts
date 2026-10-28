@@ -174,3 +174,9 @@ export function intakeText(i: Intake) {
     .concat(intakeGroups(i).flatMap((g) => [`== ${g.heading}`, ...g.rows.map(([k, v]) => `${k}: ${v || "—"}`), ""]))
     .join("\n");
 }
+
+export function validIntake(i: Partial<Intake> | null): i is Intake {
+  if (!i || typeof i !== "object") return false;
+  const ok = (v: unknown) => typeof v === "string" && v.trim().length > 0;
+  return ok(i.community) && ok(i.contactName) && typeof i.email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.email) && JSON.stringify(i).length < 50_000;
+}

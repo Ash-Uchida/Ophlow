@@ -2,8 +2,9 @@
 
 The public site for Ophlow: who we are, what we build, and product one (Ophlow for Senior Living).
 
-- `npm install` once, then `npm run dev` and open http://localhost:3002
-- `npm run build` writes plain HTML to `out/`. Upload that folder to any static host (Vercel, Netlify, GitHub Pages, S3).
+- `npm install` once, copy `.env.example` to `.env.local` and fill it in, then `npm run dev` and open http://localhost:3002
+- Hosted on Vercel: the routes in `app/api` save demo bookings and setup forms to Supabase (`supabase/leads.sql`).
+  With no keys set, the forms fall back to a pre-filled email.
 
 The contact address lives in `lib/site.ts` and the page text lives in `app/page.tsx`.
 

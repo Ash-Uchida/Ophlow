@@ -15,10 +15,9 @@ schema (`supabase/leads.sql`). Read them in Supabase → Table Editor → schema
 Account steps only you can do, for both landing pages (and the apps), most important first. Tell Claude when one is
 done and it does the follow-up.
 
-- [ ] **GoDaddy DNS:** sign in to GoDaddy in Claude's browser pane and say "go". Claude switches ophlow.com to Vercel
-      (section 1), and can add a restaurant address (e.g. `restaurants.ophlow.com`) and the Resend domain records in
-      the same sitting. Then turn off GitHub Pages: repo → Settings → Pages.
-- [ ] **Turn on Analytics:** Vercel → `ophlow-landing-page` and `ophlow-restaurants` → **Analytics** → Enable.
+- [x] **GoDaddy DNS:** done 2026-10-29. ophlow.com and www.ophlow.com point at Vercel, HTTPS certificate issued, the
+      GitHub Pages custom domain removed. Still open: a restaurant address (e.g. `restaurants.ophlow.com`), if wanted.
+- [x] **Turn on Analytics:** enabled on `ophlow-landing-page` and `ophlow-restaurants` (2026-10-29).
 - [ ] **Review the privacy policy and terms drafts:** pull requests Ophlow-landing-page #14 and
       Landing-page-Restuarant #4. Check the 1-year keep period and the 30-day reply promise, then merge.
 - [ ] **Resend:** sign up at resend.com with ophlow@gmail.com → API key → add `RESEND_API_KEY` in both Vercel projects
@@ -47,7 +46,7 @@ longer claims a live pilot.
 
 ## To do
 
-### 1. Go live on Vercel — *most important* · You
+### 1. Go live on Vercel — *done 2026-10-29*: ophlow.com is served by Vercel
 
 Code is done: bookings and setup forms save to Supabase, booked times are hidden, double-booking is refused, and the
 database can't be read from outside. What's left is account setup:
@@ -72,7 +71,7 @@ check Supabase for new rows.
 
 - [x] Vercel Web Analytics in the code (no cookies), with events: "Demo time picked", "Demo booked",
       "Setup form sent".
-- [ ] **You:** Vercel → ophlow-landing-page → **Analytics** → Enable. Nothing is counted until it's on.
+- [x] **You:** Vercel → ophlow-landing-page → **Analytics** → Enable (done 2026-10-29).
 
 *Done when:* we can see last week's visits and how many people started vs finished a booking.
 

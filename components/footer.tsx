@@ -20,6 +20,12 @@ export function Footer() {
           <Link href="/blog" className="font-medium text-forest-800 transition hover:text-rust-600">
             Blog
           </Link>
+          <Link href="/privacy" className="font-medium text-forest-800 transition hover:text-rust-600">
+            Privacy
+          </Link>
+          <Link href="/terms" className="font-medium text-forest-800 transition hover:text-rust-600">
+            Terms
+          </Link>
           <a href={`mailto:${SITE.email}`} className="font-medium text-forest-800 transition hover:text-rust-600">
             {SITE.email}
           </a>

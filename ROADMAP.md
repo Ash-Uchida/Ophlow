@@ -47,6 +47,44 @@ longer claims a live pilot.
 
 ## To do
 
+### 0. "Get started": an owner buys it themselves and it just works — *new, Oct 29*
+
+**Goal:** a small Airbnb or VRBO owner can sign up, pay and be running without a call. A "Get started" button
+next to "Book a call".
+
+**What the owner sees**
+
+1. **Add your place:** name, email, phone; the place's address, how many it sleeps, check-out and check-in times;
+   the Airbnb and VRBO **calendar links** (Export calendar); their **repair limit** (default $200); optional cleaning
+   instructions and photos.
+2. **Price and terms:** a share of each month's rental income, cleans and repairs on the monthly statement, cancel
+   any time. They tick "I agree" (needs the terms and privacy pages).
+3. **Pay:** Stripe Checkout in **setup mode**: it saves their card and charges nothing today. We charge once a month,
+   after the work is done.
+4. **Done page:** "You're set." Steps to add Ophlow as a **co-host** on Airbnb (for guest messages), and an email with
+   a sign-in link to their owner dashboard.
+
+**What happens behind it**
+
+- Stripe sends `checkout.session.completed` to a webhook on our server. It creates, in the app's database: the owner's
+  account (Owner job, sees only their places), the place with its calendar links and limit. Calendar sync starts,
+  so the next checkout already makes a turnover clean. No one on our team has to do anything.
+- **Monthly statement** (1st of the month): our share + cleans + repairs → a Stripe invoice charged to the saved
+  card, and the same statement on the owner's dashboard.
+- Repairs under the limit just go on the statement; over it, the owner approves in the app first.
+
+**Problem to solve first:** calendar links have dates but **no prices**, so we can't see rental income from them.
+Options: the owner's monthly Airbnb earnings report, co-host earnings if we're co-host, or the owner types the
+month's income. Pick one before the share-of-income price can be charged automatically.
+
+**Build order:** (1) "Add your place" form, saved like the other forms (replaces the senior-living `/workspace`);
+(2) Stripe Checkout + webhook; (3) the webhook creates the owner and place in the app; (4) monthly statement and
+invoice.
+
+**Needs from Ash:** a Stripe account in the business's name (needs the legal entity and its tax ID, or start as a
+sole proprietor); `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` and the publishable key in Vercel; the terms and
+privacy pages; the percentage. Test everything in Stripe's test mode first.
+
 ### 1. Go live on Vercel — *most important* · You
 
 Code is done: bookings and setup forms save to Supabase, booked times are hidden, double-booking is refused, and the

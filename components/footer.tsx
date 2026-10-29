@@ -12,10 +12,10 @@ export function Footer() {
             © {new Date().getFullYear()} {SITE.name}. {SITE.tagline}
           </p>
           <Link href="/book" className="font-medium text-forest-800 transition hover:text-rust-600">
-            Book a demo
+            Book a call
           </Link>
-          <Link href="/workspace" className="font-medium text-forest-800 transition hover:text-rust-600">
-            Get started
+          <Link href="/#how" className="font-medium text-forest-800 transition hover:text-rust-600">
+            How it works
           </Link>
           <Link href="/blog" className="font-medium text-forest-800 transition hover:text-rust-600">
             Blog

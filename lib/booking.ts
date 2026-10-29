@@ -19,11 +19,13 @@ export type Booking = {
   notes: string;
 };
 
-export const ROLE_OPTIONS = ["Executive director", "Operations / admin", "Department head", "Owner / investor", "Something else"];
+// Senior living options were: Executive director, Operations / admin, Department head, Owner / investor.
+export const ROLE_OPTIONS = ["I own the place", "I co-host or manage it for someone", "I clean or fix rentals", "Something else"];
 
-export const CURRENT_TOOLS = ["Paper and clipboards", "Group texts / whiteboards", "Spreadsheets", "Software that isn't working", "Something else"];
+// Senior living options were: Paper and clipboards, Group texts / whiteboards, Spreadsheets, Software that isn't working.
+export const CURRENT_TOOLS = ["I do it myself", "I have a cleaner I text", "A management company", "Something else"];
 
-export const bookingSummary = (b: Booking) => `Demo: ${b.community} (${b.name})`;
+export const bookingSummary = (b: Booking) => `Call: ${b.community} (${b.name})`;
 
 /** Label/value rows for the email to us, with the time in both our zone and theirs. */
 export function bookingRows(b: Booking): [string, string][] {

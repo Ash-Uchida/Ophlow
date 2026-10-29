@@ -1,17 +1,16 @@
 export const SITE = {
   name: "Ophlow",
-  tagline: "Operations software, built on the floor.",
+  tagline: "Cleaning and repairs for Airbnb and VRBO owners.",
   description:
-    "Ophlow helps companies organize day-to-day operations with simple software for tasks, checklists, requests and shift handoffs. Our first product is built for senior living, with applications across hotels, restaurants and other industries.",
+    "Ophlow is the management company for owners with one rental or a few. We send a cleaner after every checkout and a handyman when something breaks, and you see the photos and the costs.",
   email: "ophlow@gmail.com",
 };
 
 export const NAV = [
-  { href: "/#product", label: "Product" },
-  { href: "/#build", label: "Build yours" },
-  { href: "/#how", label: "How we work" },
+  { href: "/#how", label: "How it works" },
+  { href: "/#dashboard", label: "What you see" },
   { href: "/#faq", label: "FAQ" },
-  { href: "/blog", label: "Blog" },
+  // Hidden while the blog posts are about senior living: { href: "/blog", label: "Blog" },
 ];
 
 /**

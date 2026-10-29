@@ -52,13 +52,13 @@ export function Header() {
             href="/book"
             className="rounded-full border border-ink-300 bg-paper px-4 py-2 text-sm font-semibold text-forest-900 transition hover:-translate-y-0.5 hover:border-forest-400"
           >
-            Book a demo
+            Book a call
           </Link>
           <Link
-            href="/workspace"
+            href="/#how"
             className="rounded-full bg-forest-800 px-4 py-2 text-sm font-semibold text-cream transition hover:-translate-y-0.5 hover:bg-forest-900 hover:shadow-lg hover:shadow-forest-900/20"
           >
-            Get started
+            How it works
           </Link>
         </div>
         <button
@@ -85,10 +85,10 @@ export function Header() {
           ))}
           <div className="mt-4 grid grid-cols-2 gap-2">
             <Link href="/book" className="rounded-full border border-ink-300 bg-paper px-4 py-3 text-center text-sm font-semibold text-forest-900">
-              Book a demo
+              Book a call
             </Link>
-            <Link href="/workspace" className="rounded-full bg-forest-800 px-4 py-3 text-center text-sm font-semibold text-cream">
-              Get started
+            <Link href="/#how" className="rounded-full bg-forest-800 px-4 py-3 text-center text-sm font-semibold text-cream">
+              How it works
             </Link>
           </div>
         </nav>

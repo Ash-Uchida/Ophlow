@@ -120,8 +120,8 @@ export function BookingWidget() {
           href={googleCalendarLink({
             start: slot.start,
             end: slot.end,
-            summary: `${SITE.name} demo`,
-            details: `${AVAILABILITY.slotMinutes}-minute demo with the ${SITE.name} team. Questions: ${SITE.email}`,
+            summary: `${SITE.name} call`,
+            details: `${AVAILABILITY.slotMinutes}-minute call with the ${SITE.name} team. Questions: ${SITE.email}`,
           })}
           target="_blank"
           rel="noreferrer"
@@ -156,8 +156,8 @@ export function BookingWidget() {
           href={googleCalendarLink({
             start: slot.start,
             end: slot.end,
-            summary: `${SITE.name} demo`,
-            details: `${AVAILABILITY.slotMinutes}-minute demo with the ${SITE.name} team. Questions: ${SITE.email}`,
+            summary: `${SITE.name} call`,
+            details: `${AVAILABILITY.slotMinutes}-minute call with the ${SITE.name} team. Questions: ${SITE.email}`,
           })}
           target="_blank"
           rel="noreferrer"
@@ -180,7 +180,7 @@ export function BookingWidget() {
       <div className="grid lg:grid-cols-[17rem_1fr]">
         <aside className="border-b border-ink-100 bg-forest-900 p-7 text-cream lg:border-b-0">
           <p className="text-sm font-semibold uppercase tracking-wider text-rust-200">{SITE.name} team</p>
-          <h2 className="mt-3 text-2xl font-semibold">{SITE.name} demo</h2>
+          <h2 className="mt-3 text-2xl font-semibold">{SITE.name} call</h2>
           <p className="mt-2 text-sm text-forest-200">{AVAILABILITY.slotMinutes} minutes · video call</p>
           <ul className="mt-6 space-y-2.5 text-sm text-forest-100">
             <li>• The manager website and staff phone app, live</li>
@@ -234,7 +234,7 @@ export function BookingWidget() {
             ) : slots.length === 0 ? (
               <p className="rounded-2xl bg-cream p-5 text-sm text-ink-700">
                 We&apos;re fully booked for the next few weeks. Email{" "}
-                <a className="font-semibold underline" href={`mailto:${SITE.email}?subject=Book%20a%20demo`}>
+                <a className="font-semibold underline" href={`mailto:${SITE.email}?subject=Book%20a%20call`}>
                   {SITE.email}
                 </a>{" "}
                 and we&apos;ll make room.
@@ -319,35 +319,35 @@ export function BookingWidget() {
             <button type="button" onClick={() => setSlot(null)} className="mb-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink-600 hover:text-forest-800">
               <ArrowLeft className="h-4 w-4" /> Change time
             </button>
-            <p className="font-serif text-xl font-semibold text-forest-950">Tell us about your community</p>
+            <p className="font-serif text-xl font-semibold text-forest-950">Tell us about your place</p>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <Field label="Your name *">
                 <input required className={input} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} autoComplete="name" />
               </Field>
-              <Field label="Work email *">
+              <Field label="Email *">
                 <input required type="email" className={input} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} autoComplete="email" />
               </Field>
-              <Field label="Community or company *">
+              <Field label="Where is your place? *">
                 <input required className={input} value={form.community} onChange={(e) => setForm({ ...form, community: e.target.value })} autoComplete="organization" />
               </Field>
               <Field label="Phone">
                 <input type="tel" className={input} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} autoComplete="tel" />
               </Field>
-              <Field label="Your role">
+              <Field label="You are">
                 <select className={input} value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
                   {ROLE_OPTIONS.map((o) => (
                     <option key={o}>{o}</option>
                   ))}
                 </select>
               </Field>
-              <Field label="Buildings">
+              <Field label="How many places?">
                 <select className={input} value={form.buildings} onChange={(e) => setForm({ ...form, buildings: e.target.value })}>
                   {["1", "2–3", "4–10", "10+"].map((o) => (
                     <option key={o}>{o}</option>
                   ))}
                 </select>
               </Field>
-              <Field label="How does the floor run today?" wide>
+              <Field label="Who cleans it today?" wide>
                 <select className={input} value={form.current} onChange={(e) => setForm({ ...form, current: e.target.value })}>
                   {CURRENT_TOOLS.map((o) => (
                     <option key={o}>{o}</option>
@@ -360,7 +360,7 @@ export function BookingWidget() {
                   className={input}
                   value={form.notes}
                   onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                  placeholder="e.g. rooms sit dirty after move-outs, repair requests get lost, meal orders by phone…"
+                  placeholder="e.g. a 6-bedroom cabin in Island Park, busy May to September, my cleaner keeps cancelling…"
                 />
               </Field>
             </div>

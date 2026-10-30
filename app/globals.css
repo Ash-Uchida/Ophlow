@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
-/* Same palette as the Ophlow app: forest green, warm cream and rust. */
+/* Emerald green, warm cream and rust. (The Ophlow app uses a darker olive forest green.) */
 @theme {
-  --color-forest-50: #eef4ef;
-  --color-forest-100: #d8e6da;
-  --color-forest-200: #b3cdb7;
-  --color-forest-300: #86ad8d;
-  --color-forest-400: #5b8b64;
-  --color-forest-500: #3f6f49;
-  --color-forest-600: #2f5a39;
-  --color-forest-700: #264a2f;
-  --color-forest-800: #1f3c27;
-  --color-forest-900: #1a3221;
-  --color-forest-950: #0f1f14;
+  --color-forest-50: #ecf7f1;
+  --color-forest-100: #d2ede0;
+  --color-forest-200: #a6dbc2;
+  --color-forest-300: #6fc29e;
+  --color-forest-400: #3fa57b;
+  --color-forest-500: #23875f;
+  --color-forest-600: #1a6e4d;
+  --color-forest-700: #155a40;
+  --color-forest-800: #124a35;
+  --color-forest-900: #0f3d2c;
+  --color-forest-950: #082419;
 
   --color-ink-50: #fbf8f2;
   --color-ink-100: #f3eee4;

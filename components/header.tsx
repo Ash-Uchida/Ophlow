@@ -23,7 +23,7 @@ export function Header() {
   return (
     <header
       className={`sticky top-0 z-40 border-b bg-cream/80 backdrop-blur-md transition-shadow ${
-        progress > 0.005 ? "border-ink-200 shadow-[0_8px_30px_-12px_rgba(26,50,33,0.25)]" : "border-transparent"
+        progress > 0.005 ? "border-ink-200 shadow-[0_8px_30px_-12px_rgba(15,61,44,0.25)]" : "border-transparent"
       }`}
     >
       <div

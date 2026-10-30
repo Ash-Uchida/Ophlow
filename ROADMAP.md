@@ -57,8 +57,9 @@ next to "Book a call".
 1. **Add your place:** name, email, phone; the place's address, how many it sleeps, check-out and check-in times;
    the Airbnb and VRBO **calendar links** (Export calendar); their **repair limit** (default $200); optional cleaning
    instructions and photos.
-2. **Price and terms:** a share of each month's rental income, cleans and repairs on the monthly statement, cancel
-   any time. They tick "I agree" (needs the terms and privacy pages).
+2. **Price and terms** (from the Cabin Care owner offer): 10% of their payout billed monthly; cleaning paid per clean
+   to the cleaner; repairs at the pro's price, over $200 needs their OK; supplies at cost; cancel with 30 days'
+   notice. They tick "I agree" (needs the terms and privacy pages).
 3. **Pay:** Stripe Checkout in **setup mode**: it saves their card and charges nothing today. We charge once a month,
    after the work is done.
 4. **Done page:** "You're set." Steps to add Ophlow as a **co-host** on Airbnb (for guest messages), and an email with
@@ -73,7 +74,7 @@ next to "Book a call".
   card, and the same statement on the owner's dashboard.
 - Repairs under the limit just go on the statement; over it, the owner approves in the app first.
 
-**Problem to solve first:** calendar links have dates but **no prices**, so we can't see rental income from them.
+**Problem to solve first:** calendar links have dates but **no prices**, so we can't see the payout our 10% comes from.
 Options: the owner's monthly Airbnb earnings report, co-host earnings if we're co-host, or the owner types the
 month's income. Pick one before the share-of-income price can be charged automatically.
 

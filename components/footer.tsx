@@ -14,8 +14,8 @@ export function Footer() {
           <Link href="/book" className="font-medium text-forest-800 transition hover:text-rust-600">
             Book a call
           </Link>
-          <Link href="/#how" className="font-medium text-forest-800 transition hover:text-rust-600">
-            How it works
+          <Link href="/#pricing" className="font-medium text-forest-800 transition hover:text-rust-600">
+            See pricing
           </Link>
           <Link href="/blog" className="font-medium text-forest-800 transition hover:text-rust-600">
             Blog

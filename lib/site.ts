@@ -1,14 +1,15 @@
 export const SITE = {
   name: "Ophlow",
-  tagline: "Cleaning and repairs for Airbnb and VRBO owners.",
+  tagline: "Cabin Care: your cabin, handled.",
   description:
-    "Ophlow is the management company for owners with one rental or a few. We send a cleaner after every checkout and a handyman when something breaks, and you see the photos and the costs.",
+    "Ophlow Cabin Care runs your Island Park cabin day to day: guest messages, cleaning between guests, photo checks and repairs. You keep your listing and your prices. It costs 10% of your payout.",
   email: "ophlow@gmail.com",
 };
 
 export const NAV = [
-  { href: "/#how", label: "How it works" },
-  { href: "/#dashboard", label: "What you see" },
+  { href: "/#how", label: "What we handle" },
+  { href: "/#pricing", label: "Pricing" },
+  { href: "/#start", label: "Getting started" },
   { href: "/#faq", label: "FAQ" },
   // Hidden while the blog posts are about senior living: { href: "/blog", label: "Blog" },
 ];
@@ -27,7 +28,7 @@ export const AVAILABILITY = {
     4: [{ start: "09:00", end: "12:00" }, { start: "13:00", end: "17:00" }],
     5: [{ start: "09:00", end: "12:00" }],
   } as Record<number, { start: string; end: string }[]>,
-  slotMinutes: 20,
+  slotMinutes: 15,
   /** No booking sooner than this from now. */
   minNoticeHours: 12,
   daysAhead: 21,

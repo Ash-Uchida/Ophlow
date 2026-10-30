@@ -1,14 +1,12 @@
 import {
   CalendarSync,
   Camera,
-  Clock,
   House,
-  Languages,
+  LayoutDashboard,
   Mail,
   MessageCircle,
+  PackageCheck,
   Plus,
-  Receipt,
-  ShieldCheck,
   Wrench,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -20,12 +18,13 @@ import { SpotlightCard } from "@/components/spotlight-card";
 import { TurnoverMock } from "@/components/turnover-mock";
 import { SITE } from "@/lib/site";
 
-// The assisted-living version of this page is kept in app/_assisted-living/home.tsx.
+// Wording follows the "Ophlow Cabin Care: Owner Offer" (Oct 29). The assisted-living version of this page is kept in
+// app/_assisted-living/home.tsx.
 
 const NUMBERS: { value: string; label: string }[] = [
-  { value: "25–30%", label: "of gross rent is what a management company usually takes" },
-  { value: "5 hours", label: "between a 10 a.m. checkout and a 3 p.m. check-in" },
-  { value: "2 a.m.", label: "is when the smoke detector battery always dies" },
+  { value: "10%", label: "of your payout is our whole fee. Local full-service managers typically charge 25 to 30%." },
+  { value: "1 hour", label: "for guests to hear back, from 7 AM to 10 PM. Emergencies any time." },
+  { value: "$200", label: "Anything over it needs your OK first. Every cost is on your monthly summary." },
 ];
 
 const PAINS = [
@@ -35,56 +34,81 @@ const PAINS = [
   "A door won't lock, two hours from where you live. You drive up for ten seconds of work.",
 ];
 
-const STEPS: { icon: LucideIcon; title: string; body: string }[] = [
+const HANDLE: { icon: LucideIcon; title: string; body: string }[] = [
   {
-    icon: CalendarSync,
-    title: "Paste your calendar link",
-    body: "Airbnb and VRBO both have an Export calendar link. Paste it once and we see every booking's check-in and checkout.",
+    icon: MessageCircle,
+    title: "Guest messages",
+    body: "We answer guests inside Airbnb as your co-host, from 7 AM to 10 PM, with a phone line for emergencies.",
   },
   {
-    icon: Clock,
-    title: "We send a cleaner after every checkout",
-    body: "Each checkout becomes a turnover clean for the window before the next guest. Someone on our local team takes it.",
+    icon: CalendarSync,
+    title: "Cleaning between guests",
+    body: "We schedule a local cleaner around every checkout and check-in, including back-to-back summer weekends.",
   },
   {
     icon: Camera,
-    title: "Photos prove it's ready",
-    body: "Your checklist, your instructions, and proof photos of every room before the next guest walks in.",
+    title: "Photo checks",
+    body: "After every clean you get photos and a finished checklist, so you can see the cabin is ready.",
   },
   {
     icon: Wrench,
-    title: "Repairs, handled",
-    body: "Cleaners report anything broken with a photo. We send a handyman. Under your limit it just gets fixed; over it, you decide.",
+    title: "Repairs",
+    body: "Cleaners report anything broken with photos, and we send a trusted local pro such as Ace Handyman Services.",
+  },
+  {
+    icon: PackageCheck,
+    title: "Restocking",
+    body: "We keep basics like paper goods and soap topped up and pass the cost through at what we paid.",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "Your dashboard",
+    body: "One screen shows whether the cabin is clean, any open issues, who checks in next, and this month's costs.",
   },
 ];
 
-const DASHBOARD: { icon: LucideIcon; title: string; body: string }[] = [
-  { icon: House, title: "Was it cleaned?", body: "Each turnover with who did it, when, and the photos." },
-  { icon: Wrench, title: "What broke?", body: "Every repair, what it cost, and whether it's fixed." },
-  { icon: CalendarSync, title: "Who's next?", body: "Your next guests in and out, straight from your calendar." },
-  { icon: Receipt, title: "What did it cost?", body: "One monthly statement: cleans, repairs, and our share." },
+const PRICING: { cost: string; how: string }[] = [
+  { cost: "Our fee", how: "10% of your payout, billed monthly." },
+  { cost: "Cleaning", how: "Paid per clean, straight to the cleaner. Usually covered by the cleaning fee guests pay." },
+  { cost: "Repairs", how: "The pro's price with no markup from us. Anything over $200 needs your OK first." },
+  { cost: "Supplies", how: "What we paid, shown on your monthly summary." },
+];
+
+const STEPS: { title: string; body: string }[] = [
+  { title: "A 15-minute call", body: "About your cabin and how you run it today." },
+  { title: "A walk-through", body: "We walk the cabin with you, make its cleaning checklist and note what repairs it tends to need." },
+  { title: "Co-host and calendar", body: "You add us as a co-host on Airbnb and share your calendar link." },
+  { title: "Your next guest", body: "We handle your next guest from checkout to check-in, and you watch it on your dashboard." },
+];
+
+const PROMISES: { title: string; body: string }[] = [
+  { title: "Fast replies", body: "Guests hear back within an hour from 7 AM to 10 PM, and emergencies are handled any time." },
+  { title: "Proof, not promises", body: "Photos after every clean and every repair." },
+  { title: "Re-clean guarantee", body: "If a guest reports a problem with the cleaning, we fix it the same day." },
+  { title: "No long-term contract", body: "Cancel with 30 days' notice. Bookings already made are still covered." },
+  { title: "No surprises", body: "You approve anything over $200, and every cost shows on your monthly summary." },
 ];
 
 const FAQS = [
   {
-    q: "Do I have to leave Airbnb or VRBO?",
-    a: "No. You keep your listing exactly as it is. You paste your calendar link so we know when guests come and go. If you want us to answer guest messages too, you add Ophlow as a co-host, which is a normal Airbnb feature.",
+    q: "Do I have to give up my listing?",
+    a: "No. You stay the host. Your listing, photos, nightly prices, calendar and house rules stay yours, and you can use your cabin whenever it's open. We work alongside you as a co-host, not instead of you.",
+  },
+  {
+    q: "What's a payout?",
+    a: "The money that reaches you after Airbnb's fees and taxes. Our fee is 10% of that, billed monthly.",
   },
   {
     q: "Who are the cleaners?",
-    a: "A local team of on-call cleaners and handymen we work with. Every clean follows your checklist and ends with proof photos, and the app works in English and Spanish.",
+    a: "Local cleaners we schedule around every checkout. Every clean follows your cabin's checklist and ends with photos. You pay them per clean, and that's usually covered by the cleaning fee your guests pay.",
   },
   {
     q: "What happens when something breaks?",
-    a: "The cleaner reports it with a photo and we send someone to fix it. You set a limit, like $200: anything under it just gets done and shows on your monthly statement. Anything over it waits for your OK.",
-  },
-  {
-    q: "What does it cost?",
-    a: "A share of the rent your place makes each month, well under what a management company takes. We're setting the exact number with our first owners, so book a call and we'll work it out for your place.",
+    a: "The cleaner reports it with photos and we send a trusted local pro. You pay the pro's price with no markup from us. Anything over $200 waits for your OK.",
   },
   {
     q: "Where do you work?",
-    a: "We're starting around Island Park and Yellowstone. If your place is somewhere else, tell us anyway.",
+    a: "We're starting with cabins around Island Park.",
   },
 ];
 
@@ -119,14 +143,17 @@ export default function Home() {
             <div className="mx-auto max-w-3xl animate-rise text-center lg:mx-0 lg:text-left">
               <p className="inline-flex items-center gap-2 rounded-full border border-forest-200 bg-paper px-4 py-1.5 text-sm font-medium text-forest-800">
                 <House className="h-4 w-4" aria-hidden />
-                For Airbnb and VRBO owners
+                Ophlow Cabin Care · Island Park
               </p>
               <h1 className="mt-6 text-4xl font-semibold leading-[1.1] text-forest-950 sm:text-5xl lg:text-6xl">
-                Cleaned and fixed between every guest.
+                Your cabin, handled.
               </h1>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-700 lg:mx-0">
-                Ophlow is the management company for owners with one cabin or a few. We send a cleaner after every
-                checkout and a handyman when something breaks. You see the photos and the costs, and keep most of your rent.
+                We run your cabin day to day: guest messages, cleaning between guests, photo checks and repairs. You keep
+                your listing and your prices, and you only hear from us for big decisions. It costs 10% of your payout.
+              </p>
+              <p className="mx-auto mt-3 max-w-2xl text-sm text-ink-500 lg:mx-0">
+                Built for owners who rent out their own cabin and don&apos;t want to hand everything to a full-service manager.
               </p>
               <div className="mt-9">
                 <Ctas center className="lg:justify-start" />
@@ -139,7 +166,7 @@ export default function Home() {
         </section>
 
         {/* Numbers */}
-        <section aria-label="Why owners call us" className="border-y border-ink-200/70 bg-forest-950 text-cream">
+        <section aria-label="The short version" className="border-y border-ink-200/70 bg-forest-950 text-cream">
           <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:grid-cols-3">
             {NUMBERS.map(({ value, label }) => (
               <div key={value}>
@@ -155,10 +182,11 @@ export default function Home() {
           <Reveal>
             <Eyebrow>The problem</Eyebrow>
             <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">
-              Management companies want owners with twenty places. You have one.
+              Full-service managers take a quarter of your rent. Doing it yourself takes your weekends.
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-ink-700">
-              So you run it yourself: finding cleaners, chasing repairs, answering texts. It works, until it doesn&apos;t.
+              So most owners run it themselves: finding cleaners, chasing repairs, answering texts. It works, until it
+              doesn&apos;t.
             </p>
           </Reveal>
           <Reveal delay={120} className="flex flex-col justify-center">
@@ -172,28 +200,98 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* How it works */}
+        {/* What we handle */}
         <section id="how" className="overflow-x-clip bg-paper">
           <div className="mx-auto max-w-6xl px-5 py-24">
             <Reveal className="max-w-2xl">
-              <Eyebrow>How it works</Eyebrow>
+              <Eyebrow>What we handle</Eyebrow>
               <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">
-                You list it. We turn it over.
+                Everything between one guest and the next.
               </h2>
+            </Reveal>
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {HANDLE.map(({ icon: Icon, title, body }, i) => (
+                <Reveal key={title} delay={(i % 3) * 100}>
+                  <SpotlightCard className="h-full rounded-3xl border border-ink-200 bg-cream p-7 hover:border-forest-300 hover:shadow-xl hover:shadow-forest-900/5">
+                    <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-forest-800 text-cream transition duration-300 group-hover:-rotate-6 group-hover:scale-110">
+                      <Icon className="h-6 w-6" />
+                    </span>
+                    <h3 className="text-xl font-semibold text-forest-950">{title}</h3>
+                    <p className="mt-3 leading-relaxed text-ink-700">{body}</p>
+                  </SpotlightCard>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What you keep */}
+        <section id="keep" className="mx-auto grid max-w-6xl gap-12 px-5 py-24 lg:grid-cols-2">
+          <Reveal>
+            <Eyebrow>What you keep</Eyebrow>
+            <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">You stay the host.</h2>
+          </Reveal>
+          <Reveal delay={120} className="text-lg leading-relaxed text-ink-700">
+            <p>
+              Your listing, photos, nightly prices, calendar and house rules stay yours, and you can use your cabin
+              whenever it&apos;s open. We work alongside you as a co-host, not instead of you.
+            </p>
+          </Reveal>
+        </section>
+
+        {/* Pricing */}
+        <section id="pricing" className="bg-paper">
+          <div className="mx-auto max-w-4xl px-5 py-24">
+            <Reveal className="max-w-2xl">
+              <Eyebrow>Pricing</Eyebrow>
+              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">10% of your payout.</h2>
+              <p className="mt-5 text-lg leading-relaxed text-ink-700">
+                Your payout is the money that reaches you after Airbnb&apos;s fees and taxes. Local full-service managers
+                typically charge 25 to 30%.
+              </p>
+            </Reveal>
+            <Reveal className="mt-10">
+              <table className="w-full overflow-hidden rounded-3xl border border-ink-200 bg-cream text-left">
+                <thead className="sr-only">
+                  <tr>
+                    <th scope="col">Cost</th>
+                    <th scope="col">How it works</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-ink-200">
+                  {PRICING.map(({ cost, how }) => (
+                    <tr key={cost}>
+                      <th scope="row" className="w-32 px-6 py-5 align-top font-semibold text-forest-950 sm:w-40">
+                        {cost}
+                      </th>
+                      <td className="px-6 py-5 leading-relaxed text-ink-700">{how}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Getting started */}
+        <section id="start">
+          <div className="mx-auto max-w-6xl px-5 py-24">
+            <Reveal className="max-w-2xl">
+              <Eyebrow>Getting started</Eyebrow>
+              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Four steps to your next guest.</h2>
             </Reveal>
             <ol className="relative mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               <span
                 aria-hidden
                 className="absolute left-8 right-8 top-14 hidden border-t-2 border-dashed border-forest-200 lg:block"
               />
-              {STEPS.map(({ icon: Icon, title, body }, i) => (
+              {STEPS.map(({ title, body }, i) => (
                 <li key={title} className="relative">
                   <Reveal delay={i * 140} className="h-full">
                     <div className="group relative h-full rounded-3xl border border-ink-200 bg-cream p-7 transition duration-300 hover:-translate-y-1 hover:border-forest-300 hover:shadow-xl hover:shadow-forest-900/5">
                       <span className="font-serif text-5xl font-semibold text-forest-100 transition-colors duration-300 group-hover:text-rust-200">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <Icon className="absolute right-7 top-8 h-6 w-6 text-forest-600 transition duration-300 group-hover:scale-125 group-hover:text-rust-500" />
                       <h3 className="mt-4 text-lg font-semibold text-forest-950">{title}</h3>
                       <p className="mt-2 text-[15px] leading-relaxed text-ink-700">{body}</p>
                     </div>
@@ -204,52 +302,26 @@ export default function Home() {
           </div>
         </section>
 
-        {/* What you see */}
-        <section id="dashboard">
+        {/* Promises */}
+        <section id="promises" className="bg-paper">
           <div className="mx-auto max-w-6xl px-5 py-24">
             <Reveal className="max-w-2xl">
-              <Eyebrow>What you see</Eyebrow>
-              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">
-                One simple page for your place. Nothing to set up.
-              </h2>
-              <p className="mt-5 text-lg leading-relaxed text-ink-700">
-                No software to learn. Open it from your phone and you know where things stand.
-              </p>
+              <Eyebrow>Our promises</Eyebrow>
+              <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">What you can hold us to.</h2>
             </Reveal>
-            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {DASHBOARD.map(({ icon: Icon, title, body }, i) => (
-                <Reveal key={title} delay={i * 100}>
-                  <SpotlightCard className="h-full rounded-3xl border border-ink-200 bg-paper p-7 hover:border-forest-300 hover:shadow-xl hover:shadow-forest-900/5">
-                    <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-forest-800 text-cream transition duration-300 group-hover:-rotate-6 group-hover:scale-110">
-                      <Icon className="h-6 w-6" />
-                    </span>
-                    <h3 className="text-xl font-semibold text-forest-950">{title}</h3>
-                    <p className="mt-3 leading-relaxed text-ink-700">{body}</p>
-                  </SpotlightCard>
-                </Reveal>
+            <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {PROMISES.map(({ title, body }) => (
+                <li key={title} className="rounded-3xl border border-ink-200 bg-cream p-6">
+                  <h3 className="text-lg font-semibold text-forest-950">{title}</h3>
+                  <p className="mt-2 leading-relaxed text-ink-700">{body}</p>
+                </li>
               ))}
-            </div>
-            <Reveal className="mt-10">
-              <div className="grid gap-4 rounded-3xl border border-ink-200 bg-cream p-6 sm:grid-cols-3">
-                <p className="flex items-start gap-3 text-ink-700">
-                  <MessageCircle className="mt-1 h-5 w-5 shrink-0 text-forest-600" aria-hidden />
-                  Guest messages answered, with a real person when it matters.
-                </p>
-                <p className="flex items-start gap-3 text-ink-700">
-                  <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-forest-600" aria-hidden />
-                  You set the repair limit. Nothing big gets spent without your OK.
-                </p>
-                <p className="flex items-start gap-3 text-ink-700">
-                  <Languages className="mt-1 h-5 w-5 shrink-0 text-forest-600" aria-hidden />
-                  Cleaners use the app in English or Spanish.
-                </p>
-              </div>
-            </Reveal>
+            </ul>
           </div>
         </section>
 
         {/* FAQ */}
-        <section id="faq" className="bg-paper">
+        <section id="faq">
           <div className="mx-auto max-w-3xl px-5 py-24">
             <Reveal>
               <Eyebrow>FAQ</Eyebrow>
@@ -269,21 +341,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About */}
-        <section id="about" className="mx-auto grid max-w-6xl gap-12 px-5 py-24 lg:grid-cols-2">
-          <Reveal>
-            <Eyebrow>About Ophlow</Eyebrow>
-            <h2 className="text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">A small team in eastern Idaho.</h2>
-          </Reveal>
-          <Reveal delay={120} className="space-y-5 text-lg leading-relaxed text-ink-700">
-            <p>
-              We build the software we run on: the cleaner&apos;s checklist, the repair queue, the owner&apos;s page. Then we run
-              it ourselves, so you get a management company without the management-company cut.
-            </p>
-            <p>We&apos;re looking for our first owners. If you rent out a place you don&apos;t live in, we&apos;d love to talk.</p>
-          </Reveal>
-        </section>
-
         {/* Final CTA */}
         <section id="demo" className="mx-auto max-w-6xl scroll-mt-20 px-5 pb-24">
           <Reveal>
@@ -291,9 +348,10 @@ export default function Home() {
               <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 animate-float rounded-full bg-rust-400/60 blur-2xl" />
               <div aria-hidden className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 animate-float rounded-full bg-rust-700/50 blur-2xl [animation-delay:-3.5s]" />
               <div className="relative">
-                <h2 className="text-3xl font-semibold sm:text-5xl">Stop driving up to unlock the door.</h2>
+                <h2 className="text-3xl font-semibold sm:text-5xl">Founding cabins, this winter.</h2>
                 <p className="mx-auto mt-5 max-w-2xl text-lg text-rust-50">
-                  Book a 20-minute call. Tell us about your place, and we&apos;ll tell you how we&apos;d run it.
+                  We&apos;re taking on a few founding cabins before the summer rush. Founding owners help shape the service
+                  and lock in the 10% rate.
                 </p>
                 <div className="mt-9">
                   <Ctas center light />

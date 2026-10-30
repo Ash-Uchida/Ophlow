@@ -18,11 +18,10 @@ done and it does the follow-up.
 - [x] **GoDaddy DNS:** done 2026-10-29. ophlow.com and www.ophlow.com point at Vercel, HTTPS certificate issued, the
       GitHub Pages custom domain removed. Still open: a restaurant address (e.g. `restaurants.ophlow.com`), if wanted.
 - [x] **Turn on Analytics:** enabled on `ophlow-landing-page` and `ophlow-restaurants` (2026-10-29).
-- [ ] **Review the privacy policy and terms drafts:** pull requests Ophlow-landing-page #14 and
-      Landing-page-Restuarant #4. Check the 1-year keep period and the 30-day reply promise, then merge.
-- [ ] **Resend:** sign up at resend.com with ophlow@gmail.com → API key → add `RESEND_API_KEY` in both Vercel projects
-      (Settings → Environment Variables) → redeploy. Every booking and setup form is then emailed to you.
-- [ ] **Leaked password protection** (for the apps' staff sign-ins, not the landing pages; needs Supabase Pro, which
+- [x] **Privacy policy and terms:** merged and live on both sites at /privacy and /terms (2026-10-29).
+- [x] **Resend:** done 2026-10-29. ophlow.com is verified; both sites send from notifications@ophlow.com to
+      ophlow@gmail.com with the send-only key "ophlow-websites". Tested on both live sites.
+- [x] **Leaked password protection** — done 2026-10-29 in both projects (Supabase Pro). (For the apps' staff sign-ins, not the landing pages; needs Supabase Pro, which
       you have): supabase.com → **Living-Assistance** → Authentication → Sign In / Providers (or Attack Protection)
       → Email → turn on **Prevent use of leaked passwords** → Save. Then the same in **Righteous-Slice**. Existing
       passwords keep working; it applies the next time someone sets one. Afterwards Claude can rerun Supabase's
@@ -51,15 +50,16 @@ longer claims a live pilot.
 Code is done: bookings and setup forms save to Supabase, booked times are hidden, double-booking is refused, and the
 database can't be read from outside. What's left is account setup:
 
-- [ ] Vercel → **Add New → Project** → import `Ophlow-com/Ophlow-landing-page` into **Ash Uchida's projects (Pro)**.
+- [x] Vercel → **Add New → Project** → import `Ophlow-com/Ophlow-landing-page` into **Ash Uchida's projects (Pro)**.
       Preset Next.js, root `./`.
-- [ ] Settings → Environment Variables: `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` (values in `.env.example` /
+- [x] Settings → Environment Variables: `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` (values in `.env.example` /
       Supabase → Project Settings → API keys, Living-Assistance project) → redeploy.
-- [ ] On the `*.vercel.app` address: book a test demo and send a test setup form, check both rows in Supabase
+- [x] On the `*.vercel.app` address: book a test demo and send a test setup form, check both rows in Supabase
       (schema `leads`), then delete them.
-- [ ] Vercel → Project → **Domains** → add `ophlow.com` and `www.ophlow.com` → change the DNS records at your domain
+- [x] Vercel → Project → **Domains** → add `ophlow.com` and `www.ophlow.com` → change the DNS records at your domain
       registrar to the ones Vercel shows. The site can blink for a few minutes while DNS updates.
-- [ ] GitHub → `Ophlow-landing-page` → Settings → **Pages** → remove the custom domain and turn Pages off.
+- [x] GitHub → `Ophlow-landing-page` → Settings → **Pages** → remove the custom domain. Still to confirm: Pages
+      itself is off (GitHub still reports the old site as built).
 
 *Done when:* ophlow.com loads from Vercel and a test booking from a browser with no mail app shows up in Supabase.
 
@@ -96,13 +96,27 @@ check Supabase for new rows.
 
 ### 5. Before promoting it
 
-- [ ] **Privacy policy + terms** pages, linked in the footer: the forms collect names, work emails and phone numbers.
-      **You:** approve the text.
+- [x] **Privacy policy + terms** pages, linked in the footer (live 2026-10-29).
 - [ ] **Confirmation email to the visitor** after booking (time in their zone + a calendar file). Needs Resend with
       ophlow.com verified (a few GoDaddy records); one verification covers the restaurant site too.
 - [x] **Share image + page descriptions**, so links look right in texts, Slack and LinkedIn.
 - [ ] Rate limit per IP on `/api/book` and `/api/onboarding` (Vercel Firewall rule), only if spam gets past the
       hidden spam-trap field.
+
+### Self-serve sign-up: what this site needs (checked 2026-10-30)
+
+Both product prompts (restaurants, and Cabin Care) ask for "Get started" to become a real sign-up instead of a
+setup form. Most of this site's setup is already shared with the restaurant site: the same booking, Supabase
+`leads` schema, Resend alerts, spam trap, analytics, privacy and terms pages. The restaurant site adds Google
+Calendar on top.
+
+- [x] **Sign in** link in the header, mobile menu and footer, to `app.ophlow.com/signin`, so returning customers can
+      get back into the product (2026-10-30).
+- [ ] "Get started" goes to the product's own sign-up, not `/workspace`. Waits on the product having one.
+- [ ] Then fix the Terms line that says the setup form "doesn't create an account or a charge".
+- [ ] Keep "Prefer help? Email us your spreadsheets" as the second option, not the default.
+- [ ] Cabin Care (Airbnb owners): decide where its landing page lives before this applies to it. The page is on
+      the unpushed `claude/airbnb-landing` / `claude/airbnb-redesign` branches.
 
 ### 6. Later: the bigger pieces
 

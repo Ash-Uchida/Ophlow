@@ -270,6 +270,10 @@ export default function Home() {
                 </tbody>
               </table>
             </Reveal>
+            <Reveal className="mt-8">
+              <Ctas />
+              <p className="mt-3 text-sm text-ink-600">Sign up online in a few minutes. No charge until work is done.</p>
+            </Reveal>
           </div>
         </section>
 

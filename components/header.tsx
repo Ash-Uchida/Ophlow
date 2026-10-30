@@ -55,10 +55,10 @@ export function Header() {
             Book a call
           </Link>
           <Link
-            href="/#pricing"
+            href="/start"
             className="rounded-full bg-forest-800 px-4 py-2 text-sm font-semibold text-cream transition hover:-translate-y-0.5 hover:bg-forest-900 hover:shadow-lg hover:shadow-forest-900/20"
           >
-            See pricing
+            Get started
           </Link>
         </div>
         <button
@@ -87,8 +87,8 @@ export function Header() {
             <Link href="/book" className="rounded-full border border-ink-300 bg-paper px-4 py-3 text-center text-sm font-semibold text-forest-900">
               Book a call
             </Link>
-            <Link href="/#pricing" className="rounded-full bg-forest-800 px-4 py-3 text-center text-sm font-semibold text-cream">
-              See pricing
+            <Link href="/start" className="rounded-full bg-forest-800 px-4 py-3 text-center text-sm font-semibold text-cream">
+              Get started
             </Link>
           </div>
         </nav>

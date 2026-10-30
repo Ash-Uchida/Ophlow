@@ -11,6 +11,9 @@ export function Footer() {
           <p className="text-ink-500">
             © {new Date().getFullYear()} {SITE.name}. {SITE.tagline}
           </p>
+          <Link href="/start" className="font-medium text-forest-800 transition hover:text-rust-600">
+            Get started
+          </Link>
           <Link href="/book" className="font-medium text-forest-800 transition hover:text-rust-600">
             Book a call
           </Link>
@@ -19,6 +22,12 @@ export function Footer() {
           </Link>
           <Link href="/blog" className="font-medium text-forest-800 transition hover:text-rust-600">
             Blog
+          </Link>
+          <Link href="/privacy" className="font-medium text-forest-800 transition hover:text-rust-600">
+            Privacy
+          </Link>
+          <Link href="/terms" className="font-medium text-forest-800 transition hover:text-rust-600">
+            Terms
           </Link>
           <a href={`mailto:${SITE.email}`} className="font-medium text-forest-800 transition hover:text-rust-600">
             {SITE.email}

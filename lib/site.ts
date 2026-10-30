@@ -4,6 +4,8 @@ export const SITE = {
   description:
     "Ophlow helps companies organize day-to-day operations with simple software for tasks, checklists, requests and shift handoffs. Our first product is built for senior living, with applications across hotels, restaurants and other industries.",
   email: "ophlow@gmail.com",
+  /** Where customers who already have an account sign in to the product. */
+  signInUrl: "https://app.ophlow.com/signin",
 };
 
 export const NAV = [

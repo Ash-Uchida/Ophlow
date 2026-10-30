@@ -17,6 +17,9 @@ export function Footer() {
           <Link href="/workspace" className="font-medium text-forest-800 transition hover:text-rust-600">
             Get started
           </Link>
+          <a href={SITE.signInUrl} className="font-medium text-forest-800 transition hover:text-rust-600">
+            Sign in
+          </a>
           <Link href="/blog" className="font-medium text-forest-800 transition hover:text-rust-600">
             Blog
           </Link>

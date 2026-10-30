@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/logo";
-import { NAV } from "@/lib/site";
+import { NAV, SITE } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -48,6 +48,9 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 lg:flex">
+          <a href={SITE.signInUrl} className="px-3 py-2 text-sm font-semibold text-forest-800 transition hover:text-rust-600">
+            Sign in
+          </a>
           <Link
             href="/book"
             className="rounded-full border border-ink-300 bg-paper px-4 py-2 text-sm font-semibold text-forest-900 transition hover:-translate-y-0.5 hover:border-forest-400"
@@ -91,6 +94,9 @@ export function Header() {
               Get started
             </Link>
           </div>
+          <a href={SITE.signInUrl} className="mt-3 block text-center text-sm font-semibold text-forest-800 transition hover:text-rust-600">
+            Sign in
+          </a>
         </nav>
       ) : null}
     </header>
